@@ -267,8 +267,7 @@ hr {
 
 /*====== Footer ======*/
 .main-footer {
-  background-color: #ffffff;
-  padding: 20px 0;
+  background-color:#D0E6A5;
   margin-top: 80px;
 }
 
@@ -541,4 +540,10 @@ textarea.form-input {
     font-size: 30px;
   }
 }
+
+.footer{
+  font-size: 15px;
+  font-family: 'Quicksand', sans-serif;
+}
+
 
