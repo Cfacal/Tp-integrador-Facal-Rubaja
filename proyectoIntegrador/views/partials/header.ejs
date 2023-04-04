@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- Include Head -->
 <head>
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link width="" rel="shortcut icon" href="./images/logo-mercado-liebre.jpg" />
-	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 	<title> Circle Clothing</title>
-			<!-- Font Awesome Stylesheet -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-	<!-- Bootstrap Grid Stylesheet -->
 	<link rel="stylesheet" href="../../public/stylesheets/app.css">
-	<!-- Own Stylesheet -->
 	<link rel="stylesheet" href="../../public/stylesheets/bootstrap-grid.min.css">
 </head>
 <body>
@@ -20,22 +14,22 @@
 		<div class="container">
 			<div class="row align-items-center">
 				<div class="col-5 col-md-2">
-					<a href="index.html" class="main-header_home-link">
-						<img src="./images/logo-mercado-liebre.svg">
+					<a href="/" class="main-header_home-link">
+						<!-- <img src="./images/logo-mercado-liebre.svg"> -->
 					</a>
+				<h1 class='titulo-principal'>Circle Clothing</h1>
 				</div>
 	
 				<div class="col-7 col-md-6">
-					<form action="search-results.html" method="GET" class="search-form">
-						<input type="text" name="search" placeholder="Buscar productos, marcas y más" class="search-form_input">
+					<form action="/productos/busqueda/:producto" method="GET" class="search-form">
+						<input type="text" name="search" placeholder="Buscar productos" class="search-form_input">
 						<button type="submit" class="search-form_button"><i class="fas fa-search"></i></button>
 					</form>
 				</div>
 	
 				<div class="col-12 col-md-4">
 					<a class="main-header_credit-link">
-						<i class="fas fa-hand-holding-usd"></i>
-						Todas las opiniones en un solo lugar.
+						Las mejores marcas y precios, solo en CircleClothing
 					</a>
 				</div>
 			</div>
@@ -43,14 +37,13 @@
 			<button class="btn-toggle-navbar">
 				<i class="fas fa-bars"></i>
 			</button>
-	
-			<nav class="main-navbar">
-				<ul class="left-navbar">
-					<li><a href="index.html">Todos los productos</a></li>
-					<!-- solo logueado <li><a href="">Cargar productos</a></li> -->
-				</ul>
-    
+
         <!-- if usuario is not logeueado (angau esto es lo que va llevar) -->
+
+				<!-- <nav class="main-navbar">
+			<ul class="left-navbar">
+				<li><a href="index.html">Todos los productos</a></li>
+			</ul> -->
 	
 				<!-- <ul class="right-navbar">
 					<li>
@@ -65,6 +58,12 @@
 		</div>
 
     </-- if usuario is logueado (angau) -->
+	
+	<!-- <nav class="main-navbar">
+		<ul class="left-navbar">
+			<li><a href="index.html">Todos los productos</a></li>
+			<li><a href="">Cargar productos</a></li>
+		</ul> -->
 
     <!-- <div>
         <ul class="right-navbar">
