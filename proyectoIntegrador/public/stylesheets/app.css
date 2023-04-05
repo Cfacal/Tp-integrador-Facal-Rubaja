@@ -13,11 +13,11 @@
 /*====== Variables ======*/
 :root {
   --yellow: #D0E6A5;
-  --dark-blue: #03264C;
-  --light-blue: #1259c3;
-  --gray: #666666;
+  --dark-blue: #ccabdb;
+  --light-blue: #FA897B;
+  --gray: #FFDD94;
   --light-gray: #ebebeb;
-  --green: #39b54a;
+  --green: #86E3CE;
   --base-font-family: 'Karla', sans-serif
 }
 
