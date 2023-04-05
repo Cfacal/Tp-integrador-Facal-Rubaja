@@ -1,6 +1,6 @@
 let data ={
     usuario: {
-        nombre: "Raul Perez",
+        nombre: "Raúl Perez",
         email: "raulperez@gmail.com",
         contrasena: "rperez234",
         fecha_de_nacimiento:"04/23/1978",
@@ -73,7 +73,7 @@ let data ={
     comentarios:[
         "1" = {
             nombre_usario: "rperez",
-            texto_del_comentario: "Muy buena publicacion, me interesa",
+            texto_del_comentario: "Muy buena publicación, me interesa",
             //imagen_perfil: 
         },
         "2" = {
@@ -94,7 +94,7 @@ let data ={
         "5" = {
             //nombre_usario:,
             //texto_del_comentario:,
-            //imagen_perfil: 
+            //imagen_perfil: ƒ
         },
         "6" = {
             //nombre_usario: ,
