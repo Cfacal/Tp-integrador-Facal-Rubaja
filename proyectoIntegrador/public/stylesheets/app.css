@@ -15,7 +15,7 @@
   --yellow: #D0E6A5;
   --dark-blue: #ccabdb;
   --light-blue: #FA897B;
-  --gray: #FFDD94;
+  --gray: "black";
   --light-gray: #ebebeb;
   --green: #86E3CE;
   --base-font-family: 'Karla', sans-serif
@@ -269,6 +269,10 @@ hr {
 .main-footer {
   background-color:#D0E6A5;
   margin-top: 80px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .footer-data {
@@ -539,15 +543,12 @@ textarea.form-input {
     font-family: 'Bebas Neue', cursive;
     font-size: 30px;
   }
+  .footer{
+    font-size: 15px;
+    font-family: 'Quicksand', sans-serif;
+  }
+
 }
 
-.footer{
-  font-size: 15px;
-  font-family: 'Quicksand', sans-serif;
-}
 
-.imagen_logo {
-  height: 40px;
-  width: 40px;
- }
 
