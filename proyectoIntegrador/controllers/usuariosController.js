@@ -1,3 +1,4 @@
+const usuarios = require('../data/data')
 const controlador = {
     ingresar: function(req,res){
         res.render('login')
@@ -6,11 +7,12 @@ const controlador = {
         res.render('profile-edit')
     },
     ingresar_perfil: function(req,res){
-        res.render('profile')
+        res.render('profile', {usuario:usuarios.usuario})
     },
     registrarse: function(req,res){
         res.render('register')
     }
+
 }
 
 module.exports = controlador;

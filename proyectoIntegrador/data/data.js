@@ -10,21 +10,21 @@ let data ={
     productos: [
         {
             id: "1",
-        //  imagen:,
+            imagen: '/images/remera.png',
             nombre_del_producto: "Top Infinite",
             descripcion: "Top confeccionado 100% en tramado de morley en colores lisos. Fit al cuerpo, posee escote recto con hombros descubiertos y frunce en centro delantero ",
             fecha_de_carga: "04/05/2023"
         },
         {
             id: "2",
-            // imagen:,
+            imagen: '/images/pantalonestrella.png',
             nombre_del_producto: "Pantalon Estrella",
             descripcion:" Jean 5 bolsillos tiro alto relajado, piernas rectas, con tajos laterales de ambos lados en altura de cadera. Bordes de bolsillos gastados." ,
             fecha_de_carga: "04/05/2023"
          },
         {
             id: "3",
-            // imagen:,
+            //imagen:,
             nombre_del_producto: "Buzo Rustic",
             descripcion:"Buzo cuello redondo de frisa liviana. Cuello y puños aplicados en ribb complemento. Detalle de abertura en puños para pasar los dedos" ,
             fecha_de_carga: "04/05/2023"
@@ -133,4 +133,5 @@ let data ={
         }
     ]
 }
+module.exports = data
 
