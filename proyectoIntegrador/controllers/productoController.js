@@ -1,7 +1,8 @@
 const productos = require("../data/data")
 const controlador = {
     detalle: function(req,res){
-        res.render('product',{productos: productos.productos})
+        let id = req.params.id
+        res.render('product',{productos: productos.productos, comentarios: productos.comentarios, id:id})
     },
     agregar: function(req,res){
         res.render('product-add')

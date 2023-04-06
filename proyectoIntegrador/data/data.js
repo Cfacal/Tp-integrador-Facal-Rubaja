@@ -8,13 +8,6 @@ let data ={
         foto_de_perfil:'/images/default-image.png'
     },
     productos: [
-        // {
-        //     id: "1",
-        //     imagen: '/images/remera.png',
-        //     nombre_del_producto: "Top Infinite",
-        //     descripcion: "Top confeccionado 100% en tramado de morley en colores lisos. Fit al cuerpo, posee escote recto con hombros descubiertos y frunce en centro delantero ",
-        //     fecha_de_carga: "04/05/2023"
-        // },
         {
             id: "1",
             imagen: '/images/remeraoversize.png',
