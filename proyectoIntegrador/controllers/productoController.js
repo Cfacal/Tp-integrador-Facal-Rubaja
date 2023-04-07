@@ -8,7 +8,7 @@ const controlador = {
         res.render('product-add')
     },
     busqueda: function(req,res){
-        res.render('search-results', {productos: productos.productos})
+        res.render('search-results', {productos: productos.productos, comentarios: productos.comentarios})
     }
 }
 
