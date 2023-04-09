@@ -27,17 +27,18 @@
 			</button>
 
 
+		<% if (UsuarioLogueado === false) {%>
 
-	<!-- <nav class="main-navbar">
+		<nav class="main-navbar">
 		<ul class="left-navbar">
 			<li><a href="/">Todos los productos</a></li>
-			<li><a href="productos/agregar">Cargar productos</a></li>
+			<li><a href="/productos/agregar">Cargar productos</a></li>
 		</ul>
 
      <div>
 	
         <ul class="right-navbar">
-            <li><a href="usuarios/perfil">
+            <li><a href="/usuarios/perfil">
                     Nombre del usuario <i class="fas fa-user"></i>
                 </a> 
             </li> 
@@ -48,28 +49,29 @@
                     </button>
                 </form>
             </li> 
-        </div>
-		 -->
-        <!-- if usuario is not logeueado (angau esto es lo que va llevar) -->
+        </div> -->
 
-				<!-- <nav class="main-navbar">
+		<% } else {%>
+
+			<nav class="main-navbar">
 			<ul class="left-navbar">
-				<li><a href="index.html">Todos los productos</a></li>
-			</ul> -->
+				<li><a href="/">Todos los productos</a></li>
+			</ul>
 	
-				<!-- <ul class="right-navbar">
+				<ul class="right-navbar">
 					<li>
-						<a href="register.html">Creá tu cuenta <i class="far fa-address-card"></i>
+						<a href="/usuarios/registrarse">Creá tu cuenta <i class="far fa-address-card"></i>
 						</a>
 					</li>
 					<li>
-						<a href="login.html">Ingresá <i class="fas fa-sign-in-alt"></i></a>
+						<a href="/usuarios/ingresar">Ingresá <i class="fas fa-sign-in-alt"></i></a>
 					</li>
 				</ul>
             </nav>
 		</div>
 
-    </-- if usuario is logueado (angau) -->
+		<% } %>
+
 	
 	</header>
 </body>	
