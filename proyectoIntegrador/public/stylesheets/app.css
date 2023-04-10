@@ -555,7 +555,7 @@ textarea.form-input {
     font-family: 'Abril Fatface', cursive;
   }
 
-  .form{
+  .forms{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
