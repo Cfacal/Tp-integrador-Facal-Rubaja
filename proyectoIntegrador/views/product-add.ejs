@@ -4,24 +4,29 @@
 <%- include('./partials/head') %>
 <%- include('./partials/header') %>
 
-<div class="container products-wrapper">
+<div class="container products-wrapper formularios">
     <div class="row">
         <div class="col-12">
             <h2 class="products-title">Agregar productos</h2>
         </div>
-        <h2 class="col-12">
-            <form method="get" action="/">
+        <h2 class="col-12 ">
+            <form method="get" action="/" class="form">
                 <label>Foto del producto</label>
                 <input type="file" name="producto">
+                <br>
                 <label>Nombre del producto</label>
                 <input type="text" name="nombre_prod">
+                <br>
                 <label>Descripcion del producto</label>
                 <input type="text" name="Descripcion">
+                <br>
                 <label>Fecha de Carga</label>
                 <input type="date" name="Fecha">
+                <br>
                 <button type="submit">Cargar producto</button>
+            </form>
         </h2>
-        </form>
+        
     </div>
 </div>
 

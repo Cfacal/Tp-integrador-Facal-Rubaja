@@ -5,17 +5,21 @@
 <%- include('./partials/header') %>
 
 <!-- Novedades -->
-<div class="container products-wrapper">
+<div class="container products-wrapper formularios">
     <div class="row">
         <div class="col-12">
             <h2 class="products-title">Ingresar</h2>
         </div>
-        <form method="get" action="/usuarios/perfil">
+        <form method="get" action="/usuarios/perfil" class="form">
             <label>usuario</label>
             <input type="text" name="usuario">
+            <br>
             <label>Contraseña</label>
             <input type="password" name="Contraseña">
+            <br>
+            <label>Recordarme</label>
             <input type="checkbox" name="Recordarme" value="1">
+            <br>
             <button type="submit">Registrarse</button>
         </form>
     </div>

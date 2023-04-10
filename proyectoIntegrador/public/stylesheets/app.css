@@ -555,6 +555,16 @@ textarea.form-input {
     font-family: 'Abril Fatface', cursive;
   }
 
+  .form{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100px;
+  }
+  .formularios{
+    display: flex;
+    justify-content: center;
+  }
 }
 
 
