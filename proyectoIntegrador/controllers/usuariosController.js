@@ -10,7 +10,7 @@ const controlador = {
         res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios, UsuarioLogueado: true})
     },
     registrarse: function(req,res){
-        res.render('register', {UsuarioLogueado: true})
+        res.render('register', {UsuarioLogueado: false})
     }
 
 }
