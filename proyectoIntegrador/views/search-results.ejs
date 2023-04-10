@@ -15,7 +15,7 @@
                 <div class="d-flex align-items-center">
                     <h2 class="products-title"><%=productos[i].nombre_del_producto%></h2> 
                     <p class="product-detail-description">
-                        <!-- <a href="productos/agregar">Editar</a> -->
+                        <a href="/productos/agregar">Editar</a>
                     </p>
                 </div>
                 <div class="product-detail">
@@ -32,7 +32,7 @@
                                     <img src="<%=comentarios[i].imagen_perfil %>" alt="">
                                     <div class="data">
                                         <p class="user">
-                                        <strong> <a href="profile.html"><%=comentarios[i].nombre_usario %></a> </strong>
+                                        <strong> <a href="/usuarios/perfil"><%=comentarios[i].nombre_usario %></a> </strong>
                                          <%= comentarios[i].texto_del_comentario %></p>
                                         </div>
                                 </article>
