@@ -3,9 +3,7 @@ const controlador = {
     index: function(req, res){
         res.render('inicio', {
             productos: productos.productos, 
-            comentarios: productos.comentarios, 
-            UsuarioLogueado: false
-        })
+            comentarios: productos.comentarios, UsuarioLogueado: true})
     }
 }
 
