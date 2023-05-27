@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
 
 const productosRouter = require('./routes/productos')
 const indexRouter = require('./routes/index')
@@ -23,6 +24,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/usuarios', usuariosRouter);
 app.use('/productos', productosRouter)
+
+app.use(session({ 
+  secret: "Mensaje secreto",
+  resave: false,
+  saveUninitialized: false}));
+
+app.use(function(req, res, next){
+  if(req.session.usuario !== undefined){
+    res.locals.Logueado = true
+    res.locals.usuario = req.session.usuario
+  } else {
+    res.locals.Logueado = false
+  }
+  return next()
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

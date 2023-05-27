@@ -1,18 +1,44 @@
 const usuarios = require('../data/data')
-const cript = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 const db = require('../database/models/index')
 const controlador = {
-    ingresar: function(req,res){
-        res.render('login', {UsuarioLogueado: false})
+    ingresar: function(req, res){
+        res.render('login')
+    },
+    chequearUsuario: function(req,res){
+        let {usuario, contraseña} = req.body 
+
+        db.Usuarios.findOne({
+            where: {
+                email
+            }, 
+            raw: true
+        })
+        .then(function(usuario){
+            let verificacionContra = bcrypt.compareSync(contraseña, usuario.contraseña)
+            if (verificacionContra){
+                req.session.user = {
+                    id: usuario.id,
+                    usuario: usuario.nombre,
+                    email: usuario.emial
+                }
+            }
+            res.redirect ('/users/profile')
+        }).catch(function(error){
+            console.log(error)
+        }
+        )
+
+        res.render('login')
     },
     editar_perfil: function(req,res){
-        res.render('profile-edit',  {UsuarioLogueado: true} )
+        res.render('profile-edit',)
     },
     ingresar_perfil: function(req,res){
-        res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios, UsuarioLogueado: true})
+        res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios})
     },
     registrarse: function(req,res){
-        res.render('register', {UsuarioLogueado: false})
+        res.render('register')
     },
     crear: function(req,res){
         let {Email,usuario,Contraseña,Fecha,Documento,Foto} = req.body
