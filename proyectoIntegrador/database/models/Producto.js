@@ -4,14 +4,14 @@ module.exports = function (sequelize, dataTypes){
         id: {
             autoIncrement: true, 
             primaryKey: true, 
-            type: dataType.INTEGER
+            type: dataTypes.INTEGER
         }, 
         nombre: {
-            type: dataType.STRING(50),
+            type: dataTypes.STRING(50),
             notNull: true 
         }, 
         descripcion: {
-            type: dataType.STRING,
+            type: dataTypes.STRING,
             notNull: true
         },
         // foto_del_producto: acá tendriamos que cambiar la tabla en sql para que acepte fotos

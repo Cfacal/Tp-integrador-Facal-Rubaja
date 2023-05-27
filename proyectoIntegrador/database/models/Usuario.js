@@ -4,14 +4,14 @@ module.exports = function (sequelize, dataTypes){
         id: {
             autoIncrement: true, 
             primaryKey: true, 
-            type: dataType.INTEGER
+            type: dataTypes.INTEGER
         }, 
         nombre: {
-            type: dataType.STRING(25),
+            type: dataTypes.STRING(25),
             notNull: true 
         }, 
         emial: {
-            type: dataType.STRING(100),
+            type: dataTypes.STRING(100),
             notNull: true,
             unique: true 
       
@@ -61,5 +61,5 @@ module.exports = function (sequelize, dataTypes){
 
     }
     
-    return Usuarios
+    return usuarios
 }

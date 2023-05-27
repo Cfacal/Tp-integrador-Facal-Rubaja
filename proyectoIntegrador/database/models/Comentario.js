@@ -4,10 +4,10 @@ module.exports = function (sequelize, dataTypes){
         id: {
             autoIncrement: true, 
             primaryKey: true, 
-            type: dataType.INTEGER
+            type: dataTypes.INTEGER
         }, 
         comentario: {
-            type: dataType.STRING,
+            type: dataTypes.STRING,
             notNull: true 
         }, 
         createdAt: {
@@ -28,7 +28,7 @@ module.exports = function (sequelize, dataTypes){
     
     let Comentarios = sequelize.define(alias, cols, config)
     Comentarios.associate= function(models){
-        Comentarios.belongsTo(models.usuario,{
+        Comentarios.belongsTo(models.Usuario,{
             as:'usuario_comentario',
             foreignKey:'usuario_id'
         }),

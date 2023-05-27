@@ -1,4 +1,5 @@
 const usuarios = require('../data/data')
+const cript = require('bcryptjs');
 const db = require('../database/models/index')
 const controlador = {
     ingresar: function(req,res){
@@ -15,10 +16,11 @@ const controlador = {
     },
     crear: function(req,res){
         let {Email,usuario,Contraseña,Fecha,Documento,Foto} = req.body
+        let contra_encriptada = bcrypt.hashSync(Contraseña,12) 
         db.Usuarios.create({
             Email,
             usuario,
-            Contraseña,
+            Contraseña:contra_encriptada,
             Fecha,
             Documento,
             Foto   
