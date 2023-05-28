@@ -66,7 +66,7 @@ const controlador = {
             Foto   
         })
         .then(function(data){
-            res.redirect('')
+            res.redirect('/')
 
         })
         .catch(function(err){
