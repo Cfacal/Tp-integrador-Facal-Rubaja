@@ -6,7 +6,7 @@ const controlador = {
         res.render('login')
     },
     chequearUsuario: function(req,res){
-        let {usuario, contraseña} = req.body 
+        let {usuario, contraseña, recordarme} = req.body 
 
         db.Usuarios.findOne({
             where: {
@@ -23,6 +23,20 @@ const controlador = {
                     email: usuario.emial
                 }
             }
+
+            if (recordarme === 'on'){
+                res.cookie('recordarUsuario', {
+                    id: usuario.id, 
+                    usuario: usuario.nombre,
+                    email: usuario.emial
+                }, 
+                {
+                    maxAge: 1000*60*2
+                }
+                
+                )
+            }
+
             res.redirect ('/users/profile')
         }).catch(function(error){
             console.log(error)

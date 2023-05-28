@@ -38,12 +38,13 @@
      <div>
 	
         <ul class="right-navbar">
-            <li><a class = "hipervinculo" href="/usuarios/perfil">
-                    Nombre del usuario <i class="fas fa-user"></i>
+            <li>Hola 
+				<a class = "hipervinculo" href="/usuarios/perfil">
+                    <%=usuario.nombre%> <i class="fas fa-user"></i>
                 </a> 
             </li> 
             <li>
-                <form action="/" method="GET">
+                <form action="/" method="POST">
                     <button class="logout" type="submit">
                         <i class="hipervinculo">Cerrar sesión</i>
                     </button>

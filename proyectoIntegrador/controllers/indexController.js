@@ -4,6 +4,10 @@ const controlador = {
         res.render('inicio', {
             productos: productos.productos, 
             comentarios: productos.comentarios})
+    },
+    logout: function(req,res){
+        req.session.usuario = undefined 
+        res.redirect('/')
     }
 }
 

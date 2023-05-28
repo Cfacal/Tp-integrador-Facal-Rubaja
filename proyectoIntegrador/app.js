@@ -31,6 +31,7 @@ app.use(session({
   saveUninitialized: false}));
 
 app.use(function(req, res, next){
+  // console.log(req.cookies.recordarme)
   if(req.session.usuario !== undefined){
     res.locals.Logueado = true
     res.locals.usuario = req.session.usuario
