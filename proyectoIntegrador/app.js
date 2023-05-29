@@ -21,25 +21,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/usuarios', usuariosRouter);
-app.use('/productos', productosRouter)
-
 app.use(session({ 
   secret: "Mensaje secreto",
   resave: false,
   saveUninitialized: false}));
 
 app.use(function(req, res, next){
-  // console.log(req.cookies.recordarme)
   if(req.session.usuario !== undefined){
-    res.locals.Logueado = true
+    res.locals.logueado = true
     res.locals.usuario = req.session.usuario
   } else {
-    res.locals.Logueado = false
+    res.locals.logueado = false
   }
   return next()
 })
+
+
+app.use('/', indexRouter);
+app.use('/usuarios', usuariosRouter);
+app.use('/productos', productosRouter)
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

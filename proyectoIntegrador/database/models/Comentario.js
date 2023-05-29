@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes){
-    let alias = "Comentario";
+    let alias = "Comentarios";
     let cols = {
         id: {
             autoIncrement: true, 
@@ -10,13 +10,13 @@ module.exports = function (sequelize, dataTypes){
             type: dataTypes.STRING,
             notNull: true 
         }, 
-        createdAt: {
+        created_at: {
             type: dataTypes.DATE
         }, 
-        UpdatedAt: {
+        updated_at: {
             type: dataTypes.DATE
         }, 
-        DeletedAt: {
+        deleted_at: {
             type: dataTypes.DATE
         }
     }
@@ -28,11 +28,11 @@ module.exports = function (sequelize, dataTypes){
     
     let Comentarios = sequelize.define(alias, cols, config)
     Comentarios.associate= function(models){
-        Comentarios.belongsTo(models.Usuario,{
+        Comentarios.belongsTo(models.Usuarios,{
             as:'usuario_comentario',
             foreignKey:'usuario_id'
         }),
-        Comentarios.belongsTo(models.Producto,{
+        Comentarios.belongsTo(models.Productos,{
             as:'comentario_producto',
             foreignKey:'producto_id'
         })

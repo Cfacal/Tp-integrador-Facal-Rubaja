@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes){
-    let alias = "Usuario";
+    let alias = "Usuarios";
     let cols = {
         id: {
             autoIncrement: true, 
@@ -16,11 +16,13 @@ module.exports = function (sequelize, dataTypes){
             unique: true 
       
         },
-        contraseña: {
-            type: dataTypes.STRING(200),
+        password: {
+            type: dataTypes.STRING,
             notNull: true
         },
-        // foto_de_perfil: acá tendriamos que cambiar la tabla en sql para que acepte fotos
+        foto_de_perfil: {
+            type: dataTypes.STRING(300)
+        },
         dni: {
             type: dataTypes.INTEGER, 
             notNull: true, 
@@ -30,13 +32,13 @@ module.exports = function (sequelize, dataTypes){
             type: dataTypes.DATE,
             notNull: true 
         }, 
-        createdAt: {
+        created_at: {
             type: dataTypes.DATE
         }, 
-        UpdatedAt: {
+        updated_at: {
             type: dataTypes.DATE
         }, 
-        DeletedAt: {
+        deleted_at: {
             type: dataTypes.DATE
         }
     }
@@ -50,11 +52,11 @@ module.exports = function (sequelize, dataTypes){
     
     let usuarios = sequelize.define(alias, cols, config);
     usuarios.associate= function(models){
-        usuarios.hasMany(models.Producto,{
+        usuarios.hasMany(models.Productos,{
             as:'usuario_producto',
             foreignKey:'usuario_id'
         }),
-        usuarios.hasMany(models.Comentario,{
+        usuarios.hasMany(models.Comentarios,{
             as:'usuario_comentario',
             foreignKey:'usuario_id'
         })

@@ -27,7 +27,7 @@
 			</button>
 
 
-		<% if (locals.Logueado) {%>
+		<% if (locals.logueado) {%>
 
 		<nav class="main-navbar">
 		<ul class="left-navbar">
@@ -38,9 +38,10 @@
      <div>
 	
         <ul class="right-navbar">
-            <li>Hola 
+			<h1>Hola <%=usuario.usuario%> </h1>
+            <li>
 				<a class = "hipervinculo" href="/usuarios/perfil">
-                    <%=usuario.nombre%> <i class="fas fa-user"></i>
+                    <i class="fas fa-user"></i>
                 </a> 
             </li> 
             <li>

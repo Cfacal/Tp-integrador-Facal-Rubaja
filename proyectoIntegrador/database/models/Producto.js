@@ -1,5 +1,5 @@
 module.exports = function (sequelize, dataTypes){
-    let alias = "Producto";
+    let alias = "Productos";
     let cols = {
         id: {
             autoIncrement: true, 
@@ -14,18 +14,20 @@ module.exports = function (sequelize, dataTypes){
             type: dataTypes.STRING,
             notNull: true
         },
-        // foto_del_producto: acá tendriamos que cambiar la tabla en sql para que acepte fotos
+        foto_del_producto: {
+            type: dataTypes.STRING(300)
+        },
         fecha_de_carga: {
             type: dataTypes.DATE,
             notNull: true 
         }, 
-        createdAt: {
+        created_at: {
             type: dataTypes.DATE
         }, 
-        UpdatedAt: {
+        updated_at: {
             type: dataTypes.DATE
         }, 
-        DeletedAt: {
+        deleted_at: {
             type: dataTypes.DATE
         }
     }
@@ -37,12 +39,12 @@ module.exports = function (sequelize, dataTypes){
     
     let Productos = sequelize.define(alias, cols, config);
     Productos.associate=function(models){
-        Productos.belongsTo(models.Usuario,{
+        Productos.belongsTo(models.Usuarios,{
             as:'usuario_producto',
             foreignKey:'usuario_id'
 
         }),
-        Productos.hasMany(models.Comentario,{
+        Productos.hasMany(models.Comentarios,{
             as:'comentario_producto',
             foreignKey:'producto_id'
         })
