@@ -14,11 +14,13 @@ const controlador = {
     add:function(req,res){
         let {producto,nombre_prod,Descripcion,Fecha} = req.body
         db.Productos.create({
-            producto,
-            nombre_prod,
-            Descripcion,
-            Fecha
-            //foto
+            foto_del_producto: producto,
+            nombre: nombre_prod,
+            descripcion: Descripcion,
+            fecha_de_carga: Fecha
+
+            // Falta hacer las relaciones entre tablas
+
         })
         .then(function(data){
             res.redirect('/')
