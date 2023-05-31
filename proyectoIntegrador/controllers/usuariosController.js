@@ -4,7 +4,11 @@ const db = require('../database/models/index')
 
 const controlador = {
     ingresar: function(req, res){
-        res.render('login')
+        if(req.session.usuario != undefined){
+            res.render('login')
+        }else{
+            res.redirect('registrarse')
+        }
     },
     chequearUsuario: function(req,res){
         let {usuario, password, recordarme} = req.body 
@@ -50,10 +54,14 @@ const controlador = {
         res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios})
     },
     registrarse: function(req,res){
-        res.render('register')
+        if(req.session.usuario == undefined){
+            res.render('register')
+        }else{
+            res.redirect('ingresar')
+        }
+       
     },
     crear: function(req,res){
-        if (req.session.usuario == undefined){
         let {Email,usuario,password,Fecha,Documento,Foto} = req.body
         db.Usuarios.findOne({
             where:{
@@ -96,14 +104,10 @@ const controlador = {
                 res.render('register')
             }
         })
-    }
-            }else{
-                res.redirect('login')
-            }
-            
         
 
     }
+}
 }
 
 
