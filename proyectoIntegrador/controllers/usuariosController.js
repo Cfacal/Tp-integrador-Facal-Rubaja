@@ -59,7 +59,7 @@ const controlador = {
                 emial : Email
             }
         })
-        if(Email == " "){
+        if(Email == ""){
             let errors = {}
                 errors.message = "email no puede estar vacio"
                 res.locals.errors = errors
@@ -83,7 +83,7 @@ const controlador = {
         })
         .catch(function(err){
             console.log(err)
-            if(err == 'SequelizeUniqueConstraintError'){
+            if(err.name = 'SequelizeUniqueConstraintError'){
                 let errors = {}
                 errors.message = "ya existe un usuario con este email"
                 res.locals.errors = errors
