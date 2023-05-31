@@ -53,6 +53,7 @@ const controlador = {
         res.render('register')
     },
     crear: function(req,res){
+        if (req.session.usuario == undefined){
         let {Email,usuario,password,Fecha,Documento,Foto} = req.body
         db.Usuarios.findOne({
             where:{
@@ -95,7 +96,9 @@ const controlador = {
                 res.render('register')
             }
         })
-
+    }
+            }else{
+                res.redirect('login')
             }
             
         
