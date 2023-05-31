@@ -7,22 +7,25 @@
 <div class="container products-wrapper">
     <div class="row">
         <div class="col-12">
-            <h2 class="products-title">Resultados de búsqueda</h2>
+            
         </div>
+        <%if (resultadosEncontrados){%>
         <!-- Show the "ultimos" products -->
+            <h2 class="products-title">Resultados de búsqueda "<%=busqueda%>"</h2>
         <% for (let i =0; i<1 ; i++){%>
             <div class="container products-wrapper">
                 <div class="d-flex align-items-center">
-                    <h2 class="products-title"><%=productos[i].nombre_del_producto%></h2> 
+                    <h2 class="products-title"><%=resultados[i].nombre%></h2> 
                     <p class="product-detail-description">
                         <a href="/productos/agregar">Editar</a>
+                        <!-- después hay que ver como verificar si vos hiciste el producto -->
                     </p>
                 </div>
                 <div class="product-detail">
                     <div class="row">
                         <article class="col-12 col-lg-8 product-detail-info">
-                            <img src="<%=productos[i].imagen%>" alt="" class="product-detail-img">
-                            <p class="product-detail-description"><%=productos[i].descripcion%></p>
+                            <img src="<%=resultados[i].foto_del_producto%>" alt="" class="product-detail-img">
+                            <p class="product-detail-description"><%=resultados[i].descripcion%></p>
                         </article>
                         <% }%>
                         <div class="col-12 col-lg-4">
@@ -38,6 +41,7 @@
                                 </article>
                                 <%}%>
                             </section>
+                            <!-- unicamente los usuarios logueados pueden agregar comentarios -->
                             <form class="form" action="" method="POST">
                                 <input class="form-input" type="text" value="" placeholder="Agregar comentario">
                                 <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
@@ -45,7 +49,12 @@
                             <hr>
                         </div>
                     </div>
+
+                <%}else {%>
+                    <h2 class="products-title">No se encontró ningún resultado para tu búsqueda "<%=busqueda%>" </h2>
+                <%}%>
                 </div>
+           
     </div>
 
 </div>

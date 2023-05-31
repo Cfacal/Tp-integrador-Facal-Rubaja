@@ -23,7 +23,6 @@ const controlador = {
                     usuario: usuario.nombre,
                     email: usuario.emial
                 }
-                
                 if (recordarme === 'on'){
                     res.cookie('recordarUsuario', {
                         id: usuario.id, 

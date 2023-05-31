@@ -47,8 +47,6 @@ module.exports = function (sequelize, dataTypes){
         timestamps: true, 
         underscored: true
     }
-
-
     
     let usuarios = sequelize.define(alias, cols, config);
     usuarios.associate= function(models){
