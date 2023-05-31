@@ -65,7 +65,7 @@ const controlador = {
                 res.locals.errors = errors
                 res.render('register')
 
-            }else if (password == "" && password.length <3){
+            }else if (password == "" || password.length <3){
                 let errors = {}
                 errors.message = "Contraseña invalida"
                 res.locals.errors = errors
