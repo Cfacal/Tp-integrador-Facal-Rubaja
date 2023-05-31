@@ -83,6 +83,12 @@ const controlador = {
         })
         .catch(function(err){
             console.log(err)
+            if(err == 'SequelizeUniqueConstraintError'){
+                let errors = {}
+                errors.message = "ya existe un usuario con este email"
+                res.locals.errors = errors
+                res.render('register')
+            }
         })
 
             }
