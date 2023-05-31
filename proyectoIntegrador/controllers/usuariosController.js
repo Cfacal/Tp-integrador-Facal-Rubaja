@@ -54,14 +54,27 @@ const controlador = {
     },
     crear: function(req,res){
         let {Email,usuario,password,Fecha,Documento,Foto} = req.body
-        let contra_encriptada = bcrypt.hashSync(password,12) 
-        db.Usuarios.create({
-            emial: Email,
-            nombre: usuario,
-            password:contra_encriptada,
-            fecha_de_nacimiento: Fecha,
-            dni: Documento,
-            foto_de_perfil: Foto
+        db.Usuarios.findOne({
+            where:{
+                emial : Email
+            }
+        })
+        if(Email == " "){
+            let errors = {}
+                errors.message = "email no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+
+            }
+            else{
+                let contra_encriptada = bcrypt.hashSync(password,12) 
+                db.Usuarios.create({
+                    emial: Email,
+                    nombre: usuario,
+                    password:contra_encriptada,
+                    fecha_de_nacimiento: Fecha,
+                    dni: Documento,
+                    foto_de_perfil: Foto
         })
         .then(function(data){
 
@@ -71,6 +84,10 @@ const controlador = {
         .catch(function(err){
             console.log(err)
         })
+
+            }
+            
+        
 
     }
 }
