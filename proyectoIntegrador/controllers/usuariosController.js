@@ -56,10 +56,24 @@ const controlador = {
     },
     ingresar_perfil: function(req,res){
     if(req.session.usuario != undefined){
-            res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios})
+            
+            db.Usuarios.findAll({
+                raw:true, 
+                nest:true, 
+                include:[
+                    {association:'Productos'}
+                ]
+            })
+            .then(function(data){
+                res.render('profile',{usuario:data, comentarios: usuarios.comentarios})
+            })
+            .catch(function(err){
+                console.log(err)
+            })
         }else{
             res.redirect('/usuarios/ingresar')
         }
+    
     },
     registrarse: function(req,res){
         if(req.session.usuario == undefined){

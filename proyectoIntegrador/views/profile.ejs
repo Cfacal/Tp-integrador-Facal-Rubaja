@@ -19,10 +19,10 @@
     
                 <a class="btn mt-3 ml-4" href="/usuarios/editar">EDITAR PERFIL</a>
             </div>
-            <h5>"<%= usuario.email%>"</h5>  
+            <h5>"<%= usuario.emial%>"</h5>  
             <div>
                 <ul class="">
-                    <li><%= productos.length%> productos</li>
+                    <li><%= usuario.Productos.length%> productos</li>
                     <li>200 seguidores</li>
                     <li>300 comentarios</li>
                 </ul>
@@ -38,17 +38,17 @@
         <div class="col-12">
             <h2 class="products-title">Mis productos</h2>
         </div>
-        <% for (let i=0;i < productos.length;i++){%>
+        <% for (let i=0;i < usuario.Productos.length;i++){%>
 
             <div class="col-12 col-sm-6 col-lg-3">
                 <section class="product-box">
-                    <a href="/productos/detalle/<%=productos[i].id%>">
+                    <a href="/productos/detalle/<%=.usuario[i].Productos.id%>">
                         <figure class="product-box_image">
-                            <img src="<%=productos[i].imagen%>" alt="producto">
+                            <img src="<%=usuario[i].Productos.foto_del_producto%>" alt="producto">
                         </figure>
                         <article class="product-box_data">
-                            <h2><%=productos[i].nombre_del_producto %></h2>
-                                <p><%=productos[i].descripcion%></p>
+                            <h2><%=usuario[i].Productos.nombre%></h2>
+                                <p><%=usuario[i].Productos.descripcion%></p>
                                 <p>Comentarios: <%=comentarios.length %></p>
                         </article>
                     </a>
