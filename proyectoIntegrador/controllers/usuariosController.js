@@ -4,10 +4,10 @@ const db = require('../database/models/index')
 
 const controlador = {
     ingresar: function(req, res){
-        if(req.session.usuario != undefined){
+        if(req.session.usuario == undefined){
             res.render('login')
         }else{
-            res.redirect('registrarse')
+            res.redirect("/")
         }
     },
     chequearUsuario: function(req,res){
@@ -48,18 +48,25 @@ const controlador = {
         )
     },
     editar_perfil: function(req,res){
-        res.render('profile-edit',)
+        if(req.session.usuario != undefined){
+            res.render('profile-edit')
+        }else{
+            res.redirect("/usuarios/ingresar")
+        }
     },
     ingresar_perfil: function(req,res){
-        res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios})
+    if(req.session.usuario != undefined){
+            res.render('profile', {usuario:usuarios.usuario,productos:usuarios.productos,comentarios:usuarios.comentarios})
+        }else{
+            res.redirect('/usuarios/ingresar')
+        }
     },
     registrarse: function(req,res){
         if(req.session.usuario == undefined){
             res.render('register')
         }else{
-            res.redirect('ingresar')
+            res.redirect('/')
         }
-       
     },
     crear: function(req,res){
         let {Email,usuario,password,Fecha,Documento,Foto} = req.body

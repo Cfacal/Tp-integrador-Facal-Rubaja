@@ -11,48 +11,32 @@
                 <!-- Show the "ultimos" products -->
                     <h2 class="products-title">Resultados de búsqueda "<%=busqueda%>"</h2>
         </div>
-        
-        <% for (let i =0; i<1 ; i++){%>
-            <div class="container products-wrapper">
-                <div class="d-flex align-items-center">
-                    <h2 class="products-title"><%=resultados[i].nombre%></h2> 
-                    <p class="product-detail-description">
-                        <a href="/productos/agregar">Editar</a>
-                        <!-- después hay que ver como verificar si vos hiciste el producto -->
-                    </p>
-                </div>
-                <div class="product-detail">
-                    <div class="row">
-                        <article class="col-12 col-lg-8 product-detail-info">
-                            <img src="<%=resultados[i].foto_del_producto%>" alt="" class="product-detail-img">
-                            <p class="product-detail-description"><%=resultados[i].descripcion%></p>
-                        </article>
-                        <% }%>
-                        <div class="col-12 col-lg-4">
-                            <section class="comments">
-                                <% for (let i=0;i <5;i++){%>
-                                <article>
-                                    <img src="<%=comentarios[i].imagen_perfil %>" alt="">
-                                    <div class="data">
-                                        <p class="user">
-                                        <strong> <a href="/usuarios/perfil"><%=comentarios[i].nombre_usario %></a> </strong>
-                                         <%= comentarios[i].texto_del_comentario %></p>
-                                        </div>
-                                </article>
-                                <%}%>
-                            </section>
-                            <!-- unicamente los usuarios logueados pueden agregar comentarios -->
-                            <form class="form" action="" method="POST">
-                                <input class="form-input" type="text" value="" placeholder="Agregar comentario">
-                                <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
-                            </form>
-                            <hr>
-                        </div>
-                    </div>
 
+        <div class="container products-wrapper">
+        <div class="row">
+  
+        <% for (let i=0;i < resultados.length;i++){%>
+
+            <div class="col-12 col-sm-6 col-lg-3">
+                <section class="product-box">
+                    <a href="/productos/detalle/<%=resultados[i].id%>">
+                        <figure class="product-box_image">
+                            <img src="<%=resultados[i].foto_del_producto%>" alt="producto">
+                        </figure>
+                        <article class="product-box_data">
+                            <h2><%=resultados[i].nombre_del_producto %></h2>
+                                <p><%=resultados[i].descripcion%></p>
+                                <p>Comentarios: <%=comentarios.length %></p>
+                        </article>
+                    </a>
+                </section>
             </div>
-                </div>
-        <div>
+
+        <% }%>
+    </div>
+</div>
+
+        
             <%}else {%>
                 <h2 class="products-title">No se encontró ningún resultado para tu búsqueda "<%=busqueda%>" </h2>
             <%}%>

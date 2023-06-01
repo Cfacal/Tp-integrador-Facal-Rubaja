@@ -8,7 +8,11 @@ const controlador = {
         res.render('product',{productos: productos.productos, comentarios: productos.comentarios, id:id})
     },
     agregar: function(req,res){
-        res.render('product-add', {UsuarioLogueado: true})
+        if(req.session.usuario != undefined){
+            res.render('product-add')
+        }else{
+            res.redirect('/')
+        }
     },
     busqueda: function(req,res){
         let busquedaUsuario = req.query.busquedaProductos
@@ -20,7 +24,7 @@ const controlador = {
                 ]          
         },
             order: [
-                ['created_at', 'ASC']
+                ['created_at', 'DESC']
             ],
             raw: true
         }).then(function(data){
