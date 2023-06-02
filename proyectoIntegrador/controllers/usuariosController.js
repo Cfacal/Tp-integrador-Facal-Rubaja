@@ -61,7 +61,7 @@ const controlador = {
                 raw:true, 
                 nest:true, 
                 include:[
-                    {association:'Productos'}
+                    {association:'usuario_producto'}
                 ]
             })
             .then(function(data){
