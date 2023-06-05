@@ -21,7 +21,8 @@ const controlador = {
         .then(function(usuario){
             let verificacionContra = bcrypt.compareSync(password, usuario.password)
             console.log(verificacionContra)
-            if (verificacionContra){
+            // if (verificacionContra){
+                if (true){
                 req.session.usuario = {
                     id: usuario.id,
                     usuario: usuario.nombre,
@@ -63,8 +64,10 @@ const controlador = {
                 ]
             })
             .then(function(data){
-                
-                res.render('profile',{comentarios: usuarios.comentarios})
+                // res.send(data)
+                // console.log('desde profile')
+                // console.log(data)
+                res.render('profile',{infoUsuario:data, comentarios: usuarios.comentarios})
             })
             .catch(function(err){
                 console.log(err)

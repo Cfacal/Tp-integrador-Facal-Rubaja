@@ -23,10 +23,10 @@
             <h5>"<%= usuario.email%>"</h5>  
             <div>
                 <ul class="">
-                    <% if (usuario.usuario.producto?.length === undefined){%>
+                    <% if (infoUsuario.usuario_producto.length === 0){%>
                     <li>No hay productos subidos</li>
                     <%} else{%>
-                        <li> <%= usuario.usuario_producto?.length%> productos </li>
+                        <li> <%= infoUsuario.usuario_producto.length%> productos </li>
                    
                     <%}%>
 
@@ -47,24 +47,23 @@
             
         </div>
 
-        <% if (usuario.usuario.producto?.length === undefined){%>
+        <% if (infoUsuario.usuario_producto.length === 0){%>
             <div class="col-12">
                 <h2 class="products-title">No hay productos subidos</h2>
             </div>
                 
-            
             <%} else{%>
-            <% for (let i=0;i < usuario.usuario_producto?.length;i++){%>
+            <% for (let i=0;i < infoUsuario.usuario_producto.length;i++){%>
 
             <div class="col-12 col-sm-6 col-lg-3">
                 <section class="product-box">
-                    <a href="/productos/detalle/<%=usuario.usuario_producto[i].id%>">
+                    <a href="/productos/detalle/<%=infoUsuario.usuario_producto[i].id%>">
                         <figure class="product-box_image">
-                            <img src="<%=usuario.usuario_producto[i].foto_del_producto%>" alt="producto">
+                            <img src="<%=infoUsuario.usuario_producto[i].foto_del_producto%>" alt="producto">
                         </figure>
                         <article class="product-box_data">
-                            <h2><%=usuario.usuario_producto[i].nombre%></h2>
-                                <p><%=usuario.usuario_producto[i].descripcion%></p>
+                            <h2><%=infoUsuario.usuario_producto[i].nombre%></h2>
+                                <p><%=infoUsuario.usuario_producto[i].descripcion%></p>
                                 <p>Comentarios: <%=comentarios.length %></p>
                         </article>
                     </a>
