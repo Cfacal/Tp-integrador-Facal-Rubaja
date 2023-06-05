@@ -56,16 +56,15 @@ const controlador = {
     },
     ingresar_perfil: function(req,res){
     if(req.session.usuario != undefined){
-            
-            db.Usuarios.findAll({
-                raw:true, 
-                nest:true, 
+        let id = req.session.usuario.id
+            db.Usuarios.findByPk(id,{
                 include:[
                     {association:'usuario_producto'}
                 ]
             })
             .then(function(data){
-                res.render('profile',{usuario:data, comentarios: usuarios.comentarios})
+                
+                res.render('profile',{comentarios: usuarios.comentarios})
             })
             .catch(function(err){
                 console.log(err)

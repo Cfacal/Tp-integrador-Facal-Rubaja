@@ -30,6 +30,7 @@ app.use(function(req, res, next){
   if(req.session.usuario !== undefined){
     res.locals.logueado = true
     res.locals.usuario = req.session.usuario
+    console.log(res.locals.usuario.email)
   } else {
     res.locals.logueado = false
   }
