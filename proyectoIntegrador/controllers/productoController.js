@@ -24,7 +24,7 @@ const controlador = {
                 ]          
         },
             order: [
-                ['created_at', 'DESC']
+                ['created_at', 'ASC']
             ],
             raw: true
         }).then(function(data){
@@ -46,7 +46,7 @@ const controlador = {
     },
     add:function(req,res){
         if(req.session.usuario != undefined){
-        let usuarioId = req.sessio.usuario.id
+        let usuarioId = req.session.usuario.id
         let {producto,nombre_prod,Descripcion,Fecha} = req.body
         db.Productos.create({
             usuario_id : usuarioId,
