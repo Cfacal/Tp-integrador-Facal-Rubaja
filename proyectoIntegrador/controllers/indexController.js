@@ -6,9 +6,9 @@ const controlador = {
     index: function(req,res){
         db.Productos.findAll({
             order:[
-                ['fecha_de_carga', 'DESC']
+                ['fecha_de_carga', 'ASC']
             ],
-            raw: true
+            include: [{association:'usuario_producto'}]
         })
         .then(function(data){
             res.render('inicio', {
