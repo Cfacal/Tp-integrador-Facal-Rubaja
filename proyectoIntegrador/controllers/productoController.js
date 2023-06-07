@@ -5,13 +5,16 @@ let op = db.Sequelize.Op
 const controlador = {
     detalle: function(req,res){
         let id = req.params.id
-        let usuario = req.session.usuario.id
+        let navegador
+        if(req.session.usuario != undefined){
+            navegador = req.session.usuario.id
+        }else{
+            navegador = "No hay usuario registrado"
+        }
         db.Productos.findByPk(id,{include:[{association: 'usuario_producto'}]})
         .then(function(data){
-            res.render('product', {productos: data, comentarios: productos.comentarios, usuario: usuario})
-        }.catch(function(error){
-            console.log(error)
-        }))
+            res.render('product', {productos: data, comentarios: productos.comentarios, navegador: navegador})
+        })
     },
     agregar: function(req,res){
         if(req.session.usuario != undefined){
