@@ -12,15 +12,16 @@
 
 <div class="container products-wrapper">
     <div class="d-flex align-items-center">
-        <h2 class="products-title"><%=productos[i].nombre_del_producto%></h2> 
+        <h2 class="products-title"><%=productos[i].nombre%></h2> 
         <p class="product-detail-description">
+            <p><%=productos[i].usuario_producto.nombre%></p>
             <a href="/productos/agregar" class = "hipervinculo">Editar</a>
         </p>
     </div>
     <div class="product-detail">
         <div class="row">
             <article class="col-12 col-lg-8 product-detail-info">
-                <img src="<%=productos[i].imagen%>" alt="" class="product-detail-img">
+                <img src="<%=productos[i].foto_del_producto%>" alt="" class="product-detail-img">
                 <p class="product-detail-description"><%=productos[i].descripcion%></p>
             </article>
      <%}%>

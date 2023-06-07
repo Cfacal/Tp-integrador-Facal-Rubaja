@@ -5,7 +5,10 @@ let op = db.Sequelize.Op
 const controlador = {
     detalle: function(req,res){
         let id = req.params.id
-        res.render('product',{productos: productos.productos, comentarios: productos.comentarios, id:id})
+        db.Productos.findByPk(id,{include:[{association: 'usuario_producto'}]})
+        .then(function(data){
+            res.render('product', {productos: data, comentarios: productos.comentarios})
+        })
     },
     agregar: function(req,res){
         if(req.session.usuario != undefined){
@@ -24,7 +27,7 @@ const controlador = {
                 ]          
         },
             order: [
-                ['created_at', 'ASC']
+                ['created_at', 'DESC']
             ],
             raw: true
         }).then(function(data){

@@ -61,7 +61,7 @@ const controlador = {
                     {association:'usuario_producto'}
                 ],
                 order: [
-                    ['created_at', 'ASC']
+                    ['created_at', 'DESC']
                 ]
             })
             .then(function(data){

@@ -6,7 +6,7 @@ const controlador = {
     index: function(req,res){
         db.Productos.findAll({
             order:[
-                ['fecha_de_carga', 'ASC']
+                ['fecha_de_carga', 'DESC']
             ],
             include: [{association:'usuario_producto'}]
         })
