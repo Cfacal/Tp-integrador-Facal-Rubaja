@@ -4,29 +4,29 @@
 <%- include('./partials/head') %>
 <%- include('./partials/header') %>
 
-
-<% for (let i=0;i < productos.length;i++){%>
-    <% if (productos[i].id.toString() === id) {%>
        
   
 
 <div class="container products-wrapper">
     <div class="d-flex align-items-center">
-        <h2 class="products-title"><%=productos[i].nombre%></h2> 
-        <p class="product-detail-description">
-            <p><%=productos[i].usuario_producto.nombre%></p>
+        <h2 class="products-title"><%=productos.nombre%></h2> 
+        <% if (productos.usuario_producto.id === usuario){%>
+
+        
+        <p class="product-detail-description">  
             <a href="/productos/agregar" class = "hipervinculo">Editar</a>
         </p>
+    <% } %>
     </div>
     <div class="product-detail">
         <div class="row">
             <article class="col-12 col-lg-8 product-detail-info">
-                <img src="<%=productos[i].foto_del_producto%>" alt="" class="product-detail-img">
-                <p class="product-detail-description"><%=productos[i].descripcion%></p>
+                <img src="<%=productos.foto_del_producto%>" alt="" class="product-detail-img">
+                <p class="product-detail-description"><%=productos.descripcion%></p>
+                <p class="product-detail-description">Creado por: <a href="/usuarios/editar/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
             </article>
-     <%}%>
 
-     <% }%>
+
             <div class="col-12 col-lg-4">
                 <section class="comments">
                     <% for (let i=0;i <5;i++){%>
