@@ -24,7 +24,7 @@ const controlador = {
                 ]          
         },
             order: [
-                ['created_at', 'DESC']
+                ['created_at', 'ASC']
             ],
             raw: true
         }).then(function(data){
@@ -45,14 +45,16 @@ const controlador = {
         })
     },
     add:function(req,res){
+        if(req.session.usuario != undefined){
+        let usuarioId = req.session.usuario.id
         let {producto,nombre_prod,Descripcion,Fecha} = req.body
         db.Productos.create({
-            foto_del_producto: producto,
+            usuario_id : usuarioId,
             nombre: nombre_prod,
             descripcion: Descripcion,
+            foto_del_producto: producto,
             fecha_de_carga: Fecha
 
-            // Falta hacer las relaciones entre tablas
 
         })
         .then(function(data){
@@ -63,7 +65,10 @@ const controlador = {
 
         })
 
+    }else{
+        res.redirect('/usuarios/ingresar')
     }
+}
 }
 
 module.exports = controlador;

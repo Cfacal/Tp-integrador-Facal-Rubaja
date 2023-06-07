@@ -20,9 +20,7 @@ const controlador = {
         })
         .then(function(usuario){
             let verificacionContra = bcrypt.compareSync(password, usuario.password)
-            console.log(verificacionContra)
-            // if (verificacionContra){
-                if (true){
+            if (verificacionContra){
                 req.session.usuario = {
                     id: usuario.id,
                     usuario: usuario.nombre,
@@ -61,6 +59,9 @@ const controlador = {
             db.Usuarios.findByPk(id,{
                 include:[
                     {association:'usuario_producto'}
+                ],
+                order: [
+                    ['created_at', 'ASC']
                 ]
             })
             .then(function(data){
