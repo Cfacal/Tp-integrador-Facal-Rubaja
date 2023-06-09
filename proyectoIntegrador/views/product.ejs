@@ -23,27 +23,28 @@
             <article class="col-12 col-lg-8 product-detail-info">
                 <img src="<%=productos.foto_del_producto%>" alt="" class="product-detail-img">
                 <p class="product-detail-description"><%=productos.descripcion%></p>
-                <p class="product-detail-description">Creado por: <a href="/usuarios/editar/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
+                <p class="product-detail-description">Creado por: <a href="/usuarios/perfil/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
             </article>
-
-
             <div class="col-12 col-lg-4">
                 <section class="comments">
-                    <% for (let i=0;i <5;i++){%>
+                    <% for (let i=0;i <productos.comentario_producto.length;i++){%>
                     <article>
-                        <img src="<%=comentarios[i].imagen_perfil %>" alt="">
+                        
                         <div class="data">
-                            <p class="user">
-                            <strong> <a href="/usuarios/perfil"><%=comentarios[i].nombre_usario %></a> </strong>
-                             <%= comentarios[i].texto_del_comentario %></p>
+                            <img src="<%=comentarios[i].usuario_comentario.foto_de_perfil %>" alt="">
+                            <p class="user"><strong><a href="/usuarios/perfil/<%=comentarios[i].usuario_comentario.id%>"><%= comentarios[i].usuario_comentario.nombre%></a></p></strong>
+                             <p><%= productos.comentario_producto[i].comentario %></p>
                             </div>
                     </article>
                     <%}%>
                 </section>
+        
+            <% if (locals.logueado) {%>
                 <form class="form" action="/" method="POST">
                     <input class="form-input" type="text" value="Agregar comentario" placeholder="Agregar comentario">
                     <button type="submit" class="buy-now-button">AGREGAR COMENTARIO</button>
                 </form>
+            <%}%>
                 <hr>
             </div>
         </div>

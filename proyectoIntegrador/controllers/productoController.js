@@ -11,10 +11,26 @@ const controlador = {
         }else{
             navegador = "No hay usuario registrado"
         }
-        db.Productos.findByPk(id,{include:[{association: 'usuario_producto'}]})
-        .then(function(data){
-            res.render('product', {productos: data, comentarios: productos.comentarios, navegador: navegador})
+        const dbProductos = db.Productos.findByPk(id,
+                {include:
+                    [{association: 'usuario_producto'}, 
+                    {association: 'comentario_producto'}]
+                })
+
+        const dbComentarios = db.Comentarios.findAll({
+            where: [
+                {producto_id: id}
+            ],
+            include: [{association: 'usuario_comentario'}],
+            order: [['created_at','DESC' ]]
         })
+        Promise.all([dbProductos, dbComentarios])
+        .then(function([dbProductos, dbComentarios]){
+            res.render('product', {productos: dbProductos, comentarios: dbComentarios, navegador: navegador})
+        }).catch(function(error){
+                console.log(error)
+            })
+
     },
     agregar: function(req,res){
         if(req.session.usuario != undefined){

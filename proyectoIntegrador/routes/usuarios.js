@@ -7,7 +7,7 @@ router.post('/ingresar', usuariosControllers.chequearUsuario);
 
 router.get('/editar/:perfil?', usuariosControllers.editar_perfil);
 
-router.get('/perfil', usuariosControllers.ingresar_perfil);
+router.get('/perfil/:id', usuariosControllers.ingresar_perfil);
 
 router.post('/registrarse',usuariosControllers.crear);
 router.get('/registrarse', usuariosControllers.registrarse);
