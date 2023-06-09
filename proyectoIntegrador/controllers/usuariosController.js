@@ -18,7 +18,13 @@ const controlador = {
             }, 
             raw: true
         })
+
         .then(function(usuario){
+            if(usuario ==undefined){
+                let errors = {}
+                    errors.message = "Datos de ingreso de sesión incorrectos"
+                    res.locals.errors = errors
+                    res.render('login')}
             let verificacionContra = bcrypt.compareSync(password, usuario.password)
             if (verificacionContra){
                 req.session.usuario = {
@@ -34,12 +40,17 @@ const controlador = {
                     }, 
                     {
                         maxAge: 1000*60*2
-                    }
+                }
                     
                     )
                 }
                 res.redirect('/')
                 
+            }else{
+                let errors = {}
+                errors.message = "Datos de ingreso de sesión incorrectos"
+                res.locals.errors = errors
+                res.render('login')
             }
         }).catch(function(error){
             console.log(error)
@@ -65,9 +76,6 @@ const controlador = {
                 ]
             })
             .then(function(data){
-                // res.send(data)
-                // console.log('desde profile')
-                // console.log(data)
                 res.render('profile',{infoUsuario:data, comentarios: usuarios.comentarios})
             })
             .catch(function(err){

@@ -22,9 +22,13 @@
             <br>
             <button type="submit">Ingresar</button>
         </form>
+        
     </div>
+    
 
 </div>
-
+<%if(locals.errors){%>
+    <h2><%=errors.message%></h2>
+<%} %>
 <%- include("./partials/footer") %>
 </html>
