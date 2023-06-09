@@ -14,15 +14,15 @@ const controlador = {
         const dbProductos = db.Productos.findByPk(id,
                 {include:
                     [{association: 'usuario_producto'}, 
-                    {association: 'comentario_producto'}]
+                    {association: 'comentario_producto'}],
+                order:[['created_at', 'ASC']]
                 })
-
         const dbComentarios = db.Comentarios.findAll({
             where: [
                 {producto_id: id}
             ],
             include: [{association: 'usuario_comentario'}],
-            order: [['created_at','DESC' ]]
+            order: [['created_at','ASC' ]]
         })
         Promise.all([dbProductos, dbComentarios])
         .then(function([dbProductos, dbComentarios]){
@@ -31,6 +31,8 @@ const controlador = {
                 console.log(error)
             })
 
+            // no se por qué, no se muestran últimos comentarios primero
+            
     },
     agregar: function(req,res){
         if(req.session.usuario != undefined){
@@ -67,6 +69,20 @@ const controlador = {
             )
         }).catch(function(error){
             console.log(error)
+        })
+    },
+    comentar: function(req, res){
+        let usuarioId = req.session.usuario.id
+        let productoId = req.params.id
+        let {comentario} = req.body 
+        db.Comentarios.create({
+            usuario_id: usuarioId, 
+            producto_id: productoId,
+            comentario: comentario
+        }).then(function(data){
+            res.redirect('/productos/detalle/'+ productoId)
+        }).catch(function(err){
+            console.log(err)
         })
     },
     add:function(req,res){
