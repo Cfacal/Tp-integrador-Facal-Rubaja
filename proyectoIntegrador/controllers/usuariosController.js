@@ -65,8 +65,13 @@ const controlador = {
         }
     },
     ingresar_perfil: function(req,res){
-    if(req.session.usuario != undefined){
-        let id = req.session.usuario.id
+    //if(req.session.usuario != undefined){
+        if (req.session.usuario != undefined){
+            let id = req.session.usuario.id
+
+        }else{
+            let id = 'no existe el id'
+        }
             db.Usuarios.findByPk(id,{
                 include:[
                     {association:'usuario_producto'}
@@ -76,14 +81,14 @@ const controlador = {
                 ]
             })
             .then(function(data){
-                res.render('profile',{infoUsuario:data, comentarios: usuarios.comentarios})
+                res.render('profile',{infoUsuario:data, comentarios: usuarios.comentarios,id},)
             })
             .catch(function(err){
                 console.log(err)
             })
-        }else{
-            res.redirect('/usuarios/ingresar')
-        }
+        //}else{
+            //res.redirect('/usuarios/ingresar')
+        //}
     
     },
     registrarse: function(req,res){
