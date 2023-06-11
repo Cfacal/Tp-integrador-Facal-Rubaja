@@ -11,17 +11,7 @@
         </div>
         <div class="data-container col-6">
             <div class="d-flex align-items-center ">
-                <h1 class="main-title"><%=infoUsuario.nombre%>
-                
-                    <%if (navegador === infoUsuario.id){%>
-
-                    <a href="/usuarios/editar/<%=infoUsuario.id%>">
-                        <i class="fas fa-cog"></i>
-                    </a>
-                    
-                    <a href="/usuarios/perfil/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
-                <%}%>
-                </h1> 
+                <h1 class="main-title"><%=infoUsuario.nombre%></h1> 
             <div>
                 <%if(navegador === infoUsuario.id){%>
                     <a class="btn mt-3 ml-4" href="/usuarios/editar/<%=infoUsuario.id%>">EDITAR PERFIL</a>
@@ -41,6 +31,7 @@
 
                     <li>200 seguidores</li>
                     <li>300 comentarios</li>
+                    <!-- Acá tienen que ir los comentarios reales -->
                 </ul>
             </div>
         </div>
