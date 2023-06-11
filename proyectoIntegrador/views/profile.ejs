@@ -11,19 +11,25 @@
         </div>
         <div class="data-container col-6">
             <div class="d-flex align-items-center ">
-                <h1 class="main-title"><%=infoUsuario.usuario%>
-                    <%if (id === infoUsuario.id){%>
-                    <a href="/usuarios/editar">
+                <h1 class="main-title"><%=infoUsuario.nombre%>
+                
+                    <%if (navegador === infoUsuario.id){%>
+
+                    <a href="/usuarios/editar/<%=infoUsuario.id%>">
                         <i class="fas fa-cog"></i>
                     </a>
+                    
+                    <a href="/usuarios/perfil/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
                 <%}%>
                 </h1> 
-
-            <%if(id === infoUsuario.id){%>
-                <a class="btn mt-3 ml-4" href="/usuarios/editar">EDITAR PERFIL</a>
-            <%}%>
+            <div>
+                <%if(navegador === infoUsuario.id){%>
+                    <a class="btn mt-3 ml-4" href="/usuarios/editar/<%=infoUsuario.id%>">EDITAR PERFIL</a>
+                <%}%>
             </div>
-            <h5>"<%= infoUsuario.email%>"</h5>  
+            
+            </div>
+            <h5>"<%= infoUsuario.emial%>"</h5>  
             <div>
                 <ul class="">
                     <% if (infoUsuario.usuario_producto.length === 0){%>
