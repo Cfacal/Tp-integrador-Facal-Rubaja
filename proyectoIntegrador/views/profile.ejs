@@ -63,7 +63,14 @@
                         <article class="product-box_data">
                             <h2><%=infoUsuario.usuario_producto[i].nombre%></h2>
                                 <p><%=infoUsuario.usuario_producto[i].descripcion%></p>
-                                <p>Comentarios: <%=infoUsuario.usuario_producto.comentario_producto.length %></p>
+                                <% if (infoUsuario.usuario_producto[i].comentario_producto.length === 0){%>
+                                    <div class="col-12">
+                                        <p>No hay comentarios</p>
+                                    </div>
+                                        
+                                    <%} else{%>
+                                    <p>Comentarios: <%=infoUsuario.usuario_producto[i].comentario_producto.length %></p>
+                                <%}%>
                         </article>
                     </a>
                 </section>

@@ -79,7 +79,7 @@ const controlador = {
             .then(function(data){
                 let esLogueado 
                 if(req.session.usuario !== undefined){
-                    if(req.session.usuario.id !== infoUsuario.id){
+                    if(req.session.usuario.id !== data.id){
                         esLogueado = false
                     }else{
                         esLogueado = true
@@ -87,6 +87,7 @@ const controlador = {
                 } else{
                     esLogueado = false
                 }
+                
                 res.render('profile',{infoUsuario:data, esLogueado})
             })
             .catch(function(err){
