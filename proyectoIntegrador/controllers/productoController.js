@@ -41,6 +41,33 @@ const controlador = {
             res.redirect('/')
         }
     },
+    editar_producto: function(req,res){
+        let id = req.params.id
+        db.Productos.findByPk(id)
+        .then(function(producto){
+            res.render('product-edit',{
+                producto: producto
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    },
+    eliminar_producto: function(req,res){
+        let id = req.params.id
+
+        db.Productos.destroy({
+            where:{
+                id: id
+            }
+        })
+        .then(function(resp){
+            res.redirect('/')
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    },
     busqueda: function(req,res){
         let busquedaUsuario = req.query.busquedaProductos
         db.Productos.findAll({
@@ -106,10 +133,10 @@ const controlador = {
 
         })
 
-    }else{
-        res.redirect('/usuarios/ingresar')
+        }else{
+            res.redirect('/usuarios/ingresar')
+        }
     }
-}
 }
 
 module.exports = controlador;

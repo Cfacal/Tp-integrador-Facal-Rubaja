@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+<%- include('./partials/head') %>
+<%- include('./partials/header') %>
+
+<div class="container products-wrapper formularios">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="products-title">Editar productos</h2>
+        </div>
+        <h2 class="col-12 ">
+            <form method="post" action="/productos/agregar" class="forms">
+                <label>Foto del producto</label>
+                <input type="text" name="producto">
+                <br>
+                <label>Nombre del producto</label>
+                <input type="text" name="nombre_prod">
+                <br>
+                <label>Descripcion del producto</label>
+                <input type="text" name="Descripcion">
+                <br>
+                <label>Fecha de Carga</label>
+                <input type="date" name="Fecha">
+                <br>
+                <button type="submit">Editar producto</button>
+            </form>
+        </h2>
+        
+    </div>
+</div>
+
+
+<%- include("./partials/footer") %>
+
+ </html>
