@@ -77,14 +77,14 @@ const controlador = {
     let id = req.params.id
             db.Usuarios.findByPk(id,{
                 include:[
-                    {association:'usuario_producto'}
+                    {association:'usuario_producto'},{association:'usuario_comentario'}
                 ],
                 order: [
                     ['created_at', 'DESC']
                 ]
             })
             .then(function(data){
-                res.render('profile',{infoUsuario:data, comentarios: usuarios.comentarios,navegador:navegador})
+                res.render('profile',{infoUsuario:data,navegador:navegador})
             })
             .catch(function(err){
                 console.log(err)
