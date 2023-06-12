@@ -13,7 +13,7 @@
             <div class="d-flex align-items-center ">
                 <h1 class="main-title"><%=infoUsuario.nombre%></h1> 
             <div>
-                <%if(navegador === infoUsuario.id){%>
+                <%if(esLogueado){%>
                     <a class="btn mt-3 ml-4" href="/usuarios/editar/<%=infoUsuario.id%>">EDITAR PERFIL</a>
                 <%}%>
             </div>
@@ -63,7 +63,7 @@
                         <article class="product-box_data">
                             <h2><%=infoUsuario.usuario_producto[i].nombre%></h2>
                                 <p><%=infoUsuario.usuario_producto[i].descripcion%></p>
-                                <p>Comentarios: <%=comentarios.length %></p>
+                                <p>Comentarios: <%=infoUsuario.usuario_producto.comentario_producto.length %></p>
                         </article>
                     </a>
                 </section>

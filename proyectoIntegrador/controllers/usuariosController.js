@@ -66,25 +66,28 @@ const controlador = {
     },
     ingresar_perfil: function(req,res){
     //if(req.session.usuario != undefined){
-    let navegador
-        if (req.session.usuario != undefined){
-            navegador= req.session.usuario.id
-            
-        }else{
-            navegador = ''
-            
-        }
     let id = req.params.id
-            db.Usuarios.findByPk(id,{
+    db.Usuarios.findByPk(id,{
                 include:[
-                    {association:'usuario_producto'},{association:'usuario_comentario'}
+                    {association:'usuario_producto', include: {association: 'comentario_producto'}},{association:'usuario_comentario'}
                 ],
                 order: [
                     ['created_at', 'DESC']
                 ]
             })
+
             .then(function(data){
-                res.render('profile',{infoUsuario:data,navegador:navegador})
+                let esLogueado 
+                if(req.session.usuario !== undefined){
+                    if(req.session.usuario.id !== infoUsuario.id){
+                        esLogueado = false
+                    }else{
+                        esLogueado = true
+                    }
+                } else{
+                    esLogueado = false
+                }
+                res.render('profile',{infoUsuario:data, esLogueado})
             })
             .catch(function(err){
                 console.log(err)
