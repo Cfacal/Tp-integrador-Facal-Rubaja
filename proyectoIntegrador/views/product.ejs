@@ -8,7 +8,7 @@
 <div class="container products-wrapper">
     <div class="d-flex align-items-center">
         <h2 class="products-title"><%=productos.nombre%></h2> 
-        <% if (productos.usuario_producto.id === navegador){%>
+        <% if (esProductoDelLogueado){%>
 
         
         <p class="product-detail-description">  
@@ -25,7 +25,7 @@
             <article class="col-12 col-lg-8 product-detail-info">
                 <img src="<%=productos.foto_del_producto%>" alt="" class="product-detail-img">
                 <p class="product-detail-description"><%=productos.descripcion%></p>
-                <p class="product-detail-description">Creado por: <a href="/usuarios/perfil/<%=productos.usuario_producto.id%>"><%=productos.usuario_producto.nombre%></a></p>
+                <p class="product-detail-description">Creado por: <a href="/usuarios/perfil/<%=productos.usuario_id%>"><%=productos.usuario_producto.nombre%></a></p>
             </article>
             <div class="col-12 col-lg-4">
                 <section class="comments">
@@ -33,15 +33,15 @@
                     <article>
                         
                         <div class="data">
-                            <img src="<%=comentarios[i].usuario_comentario.foto_de_perfil %>" alt="">
-                            <p class="user"><strong><a href="/usuarios/perfil/<%=comentarios[i].usuario_comentario.id%>"><%= comentarios[i].usuario_comentario.nombre%></a></p></strong>
+                            <img src="<%=productos.comentario_producto[i].usuario_comentario.foto_de_perfil %>" alt="">
+                            <p class="user"><strong><a href="/usuarios/perfil/<%=productos.comentario_producto[i].usuario_comentario.id%>"><%= productos.comentario_producto[i].usuario_comentario.nombre%></a></p></strong>
                              <p><%= productos.comentario_producto[i].comentario %></p>
                             </div>
                     </article>
                     <%}%>
                 </section>
         
-            <% if (locals.logueado) {%>
+            <% if (logueado) {%>
                 <form class="form" action="/productos/detalle/<%=productos.id%>" method="post">
 
                     <input class="form-input" type="text" name = "comentario" placeholder="Agregar comentario">
