@@ -4,21 +4,23 @@
 <%- include('./partials/head') %>
 <%- include('./partials/header') %>
 
+<% if(data.usuario_producto.id === navegador) {%>
+
 <div class="container products-wrapper formularios">
     <div class="row">
         <div class="col-12">
             <h2 class="products-title">Editar productos</h2>
         </div>
         <h2 class="col-12 ">
-            <form method="post" action="/productos/agregar" class="forms">
+            <form method="post" action="/productos/editar/<%=data.id%>" class="forms">
                 <label>Foto del producto</label>
-                <input type="text" name="producto">
+                <input type="text" name= 'producto' value="<%=data.foto_del_producto%>">
                 <br>
                 <label>Nombre del producto</label>
-                <input type="text" name="nombre_prod">
+                <input type="text" name= 'nombre_prod' value="<%=data.nombre%>">
                 <br>
                 <label>Descripcion del producto</label>
-                <input type="text" name="Descripcion">
+                <input type="text" name= 'Descripcion' value="<%=data.descripcion%>">
                 <br>
                 <label>Fecha de Carga</label>
                 <input type="date" name="Fecha">
@@ -30,6 +32,11 @@
     </div>
 </div>
 
+<%}else{%>
+
+    <h1>No tienes permiso para editar este producto</h1>
+
+<%}%>
 
 <%- include("./partials/footer") %>
 

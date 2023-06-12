@@ -12,7 +12,7 @@
 
         
         <p class="product-detail-description">  
-            <a href="/productos/editar" class = "hipervinculo">Editar</a>
+            <a href="/productos/editar/<%=productos.id%>" class = "hipervinculo">Editar</a>
         </p>
         <form action="/productos/borrar/<%=productos.id%>" method="POST">
             <input type="submit" value="Borrar producto" />

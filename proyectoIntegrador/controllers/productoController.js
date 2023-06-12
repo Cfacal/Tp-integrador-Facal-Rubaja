@@ -41,18 +41,18 @@ const controlador = {
             res.redirect('/')
         }
     },
-    editar_producto: function(req,res){
-        let id = req.params.id
-        db.Productos.findByPk(id)
-        .then(function(producto){
-            res.render('product-edit',{
-                producto: producto
-            })
-        })
-        .catch(function(error){
-            console.log(error)
-        })
-    },
+    // editar_producto: function(req,res){
+    //     let id = req.params.id
+    //     db.Productos.findByPk(id)
+    //     .then(function(producto){
+    //         res.render('product-edit',{
+    //             producto: producto
+    //         })
+    //     })
+    //     .catch(function(error){
+    //         console.log(error)
+    //     })
+    // },
     eliminar_producto: function(req,res){
         let id = req.params.id
 
@@ -136,6 +136,47 @@ const controlador = {
         }else{
             res.redirect('/usuarios/ingresar')
         }
+    },
+    editar: function(req,res){
+        let id = req.params.id
+        let {producto, nombre_prod, Descripcion, Fecha} = req.body
+
+        db.Productos.update({
+            nombre: nombre_prod,
+            descripcion: Descripcion,
+            foto_del_producto: producto,
+            fecha_de_carga: Fecha
+        },{
+            where:{
+                id:id
+            }
+        })
+        .then(function(data){
+            res.redirect('/productos/detalle/'+ id)
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+
+    },
+    update: function(req,res){
+        let navegador 
+        if(req.session.usuario != undefined){
+            navegador = req.session.usuario.id
+        }else{
+            navegador = ""
+        }
+        let id =req.params.id
+        db.Productos.findByPk(id, 
+            {include: [{association: 'usuario_producto'}]})
+        .then(function(data){
+        res.render('product-edit', {
+                data:data, navegador: navegador
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+        })
     }
 }
 

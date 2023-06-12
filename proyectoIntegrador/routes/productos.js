@@ -8,5 +8,6 @@ router.get('/agregar', ProductoControllers.agregar)
 router.post('/agregar', ProductoControllers.add)
 router.get('/busqueda', ProductoControllers.busqueda)
 router.post('/borrar/:id', ProductoControllers.eliminar_producto)
-
+router.get('/editar/:id', ProductoControllers.update)
+router.post('/editar/:id', ProductoControllers.editar)
 module.exports = router;
