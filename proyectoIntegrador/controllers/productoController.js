@@ -5,33 +5,42 @@ let op = db.Sequelize.Op
 const controlador = {
     detalle: function(req,res){
         let id = req.params.id
-        let navegador
-        if(req.session.usuario != undefined){
-            navegador = req.session.usuario.id
-        }else{
-            navegador = "No hay usuario registrado"
-        }
-        const dbProductos = db.Productos.findByPk(id,
-                {include:
-                    [{association: 'usuario_producto'}, 
-                    {association: 'comentario_producto'}],
-                order:[['created_at', 'ASC']]
-                })
-        const dbComentarios = db.Comentarios.findAll({
-            where: [
-                {producto_id: id}
+        db.Productos.findByPk(id,
+        {
+            include:[
+                {
+                    association: 'comentario_producto',
+                    include:
+                    {
+                        association: 'usuario_comentario'
+                    },
+                },
+                {
+                    association: 'usuario_producto'
+                }
             ],
-            include: [{association: 'usuario_comentario'}],
-            order: [['created_at','ASC' ]]
+            order: [
+                ['created_at', 'DESC']
+            ]
         })
-        Promise.all([dbProductos, dbComentarios])
-        .then(function([dbProductos, dbComentarios]){
-            res.render('product', {productos: dbProductos, comentarios: dbComentarios, navegador: navegador})
-        }).catch(function(error){
-                console.log(error)
-            })
+        .then(function(product){
+            let esProductoDelLogueado 
+            if(req.session.usuario !== undefined ){
+                if(req.session.usuario.id !== product.usuario_id){
+                    esProductoDelLogueado = false
+                } else {
+                    esProductoDelLogueado = true
+                }
+            } else {
+                esProductoDelLogueado = false
+            }
+            //res.send(product)
 
-            // no se por qué, no se muestran últimos comentarios primero
+            res.render('product', {productos: product, esProductoDelLogueado})
+        }).catch(function(error){
+            console.log(error)
+        })
+        
             
     },
     agregar: function(req,res){
@@ -41,18 +50,18 @@ const controlador = {
             res.redirect('/')
         }
     },
-    // editar_producto: function(req,res){
-    //     let id = req.params.id
-    //     db.Productos.findByPk(id)
-    //     .then(function(producto){
-    //         res.render('product-edit',{
-    //             producto: producto
-    //         })
-    //     })
-    //     .catch(function(error){
-    //         console.log(error)
-    //     })
-    // },
+    editar_producto: function(req,res){
+        let id = req.params.id
+        db.Productos.findByPk(id)
+        .then(function(producto){
+            res.render('product-edit',{
+                producto: producto
+            })
+        })
+        .catch(function(error){
+            console.log(error)
+        })
+    },
     eliminar_producto: function(req,res){
         let id = req.params.id
 
