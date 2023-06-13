@@ -54,8 +54,18 @@ const controlador = {
         let id = req.params.id
         db.Productos.findByPk(id)
         .then(function(producto){
+            let Logueado 
+            if(req.session.usuario !== undefined ){
+                if(req.session.usuario.id !== product.usuario_id){
+                    Logueado = false
+                } else {
+                    Logueado = true
+                }
+            } else {
+                Logueado = false
+            }
             res.render('product-edit',{
-                producto: producto
+                producto: producto,Logueado
             })
         })
         .catch(function(error){
@@ -86,6 +96,8 @@ const controlador = {
                     {descripcion: {[op.like]: `%${busquedaUsuario}%`}}
                 ]          
         },
+        include:[{association : 'comentario_producto'}
+    ],
             order: [
                 ['created_at', 'DESC']
             ],
@@ -100,8 +112,8 @@ const controlador = {
                 resultadosEncontrados = false
             }
             res.render(
-                'search-results', {busqueda: busquedaUsuario, resultados: data, resultadosEncontrados: resultadosEncontrados, comentarios: productos.comentarios }
-                // lo de comentarios es solo momentaneamente para que no rompa la página --> después hay que completarlo con lo que dice la consigna 10
+                'search-results', {busqueda: busquedaUsuario, resultados: data, resultadosEncontrados: resultadosEncontrados }
+                
             )
         }).catch(function(error){
             console.log(error)
