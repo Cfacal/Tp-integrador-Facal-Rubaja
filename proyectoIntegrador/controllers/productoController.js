@@ -56,7 +56,7 @@ const controlador = {
         .then(function(producto){
             let Logueado 
             if(req.session.usuario !== undefined ){
-                if(req.session.usuario.id !== product.usuario_id){
+                if(req.session.usuario.id !== producto.usuario_id){
                     Logueado = false
                 } else {
                     Logueado = true
@@ -94,10 +94,10 @@ const controlador = {
                 [op.or]: [
                     {nombre : { [op.like]: `%${busquedaUsuario}%`}},
                     {descripcion: {[op.like]: `%${busquedaUsuario}%`}}
-                ]          
+                ], 
+
         },
-        include:[{association : 'comentario_producto'}
-    ],
+            include:[{association : 'comentario_producto'}],
             order: [
                 ['created_at', 'DESC']
             ],
@@ -115,6 +115,8 @@ const controlador = {
                 'search-results', {busqueda: busquedaUsuario, resultados: data, resultadosEncontrados: resultadosEncontrados }
                 
             )
+            
+           
         }).catch(function(error){
             console.log(error)
         })
