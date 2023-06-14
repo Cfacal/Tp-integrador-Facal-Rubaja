@@ -1,4 +1,4 @@
-const usuarios = require('../data/data')
+// const usuarios = require('../data/data')
 const bcrypt = require('bcryptjs');
 const db = require('../database/models/index')
 
@@ -12,19 +12,28 @@ const controlador = {
     },
     chequearUsuario: function(req,res){
         let {usuario, password, recordarme} = req.body 
+        
+        if(usuario == "" && password == ""){
+                let errors = {}
+                errors.message = "Campo no puede estar vacio"
+                errors.mensaje = "Campo no puede estar vacio"
+                res.locals.errors = errors
+                res.render('login')
+            
+        }
         db.Usuarios.findOne({
             where: {
                 emial: usuario
             }, 
             raw: true
         })
-
         .then(function(usuario){
             if(usuario ==undefined){
                 let errors = {}
-                    errors.message = "Datos de ingreso de sesión incorrectos"
+                    errors.message = "Usuario no encontrado"
                     res.locals.errors = errors
-                    res.render('login')}
+                    res.render('login')
+            }
             let verificacionContra = bcrypt.compareSync(password, usuario.password)
             if (verificacionContra){
                 req.session.usuario = {
@@ -48,7 +57,8 @@ const controlador = {
                 
             }else{
                 let errors = {}
-                errors.message = "Datos de ingreso de sesión incorrectos"
+                errors.mensaje = "Datos incorrectos"
+                errors.message = "Datos incorrectos"
                 res.locals.errors = errors
                 res.render('login')
             }
@@ -120,9 +130,25 @@ const controlador = {
 
             }else if (password == "" || password.length <3){
                 let errors = {}
-                errors.message = "Contraseña invalida"
+                errors.mensajeContrasenia = "Contraseña invalida"
                 res.locals.errors = errors
                 res.render('register')
+            } else if (usuario == ""){
+                let errors = {}
+                    errors.mensaje = "Usuario no puede estar vacio"
+                    res.locals.errors = errors
+                    res.render('register')
+    
+            } else if (Fecha == ""){
+                    let errors = {}
+                        errors.mensajeFecha = "Fecha no puede estar vacio"
+                        res.locals.errors = errors
+                        res.render('register')
+            } else if (Documento == ''){
+                let errors = {}
+                        errors.mensajeDocumento = "Documento no puede estar vacio"
+                        res.locals.errors = errors
+                        res.render('register')
             }
             else{
                 let contra_encriptada = bcrypt.hashSync(password,12) 
@@ -143,7 +169,7 @@ const controlador = {
             console.log(err)
             if(err.name = 'SequelizeUniqueConstraintError'){
                 let errors = {}
-                errors.message = "ya existe un usuario con este email"
+                errors.messageEmail = "ya existe un usuario con este email"
                 res.locals.errors = errors
                 res.render('register')
             }
