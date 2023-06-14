@@ -122,34 +122,65 @@ const controlador = {
                 emial : Email
             }
         })
-        if(Email == ""){
-            let errors = {}
+        // if(Email == ""){
+        //     let errors = {}
+        //         errors.message = "email no puede estar vacio"
+        //         res.locals.errors = errors
+        //         res.render('register')
+
+        //     }else if (password == "" || password.length <3){
+        //         let errors = {}
+        //         errors.mensajeContrasenia = "Contraseña invalida"
+        //         res.locals.errors = errors
+        //         res.render('register')
+        //     } else if (usuario == ""){
+        //         let errors = {}
+        //             errors.mensaje = "Usuario no puede estar vacio"
+        //             res.locals.errors = errors
+        //             res.render('register')
+    
+        //     } else if (Fecha == ""){
+        //             let errors = {}
+        //                 errors.mensajeFecha = "Fecha no puede estar vacio"
+        //                 res.locals.errors = errors
+        //                 res.render('register')
+        //     } else if (Documento == ''){
+        //         let errors = {}
+        //                 errors.mensajeDocumento = "Documento no puede estar vacio"
+        //                 res.locals.errors = errors
+        //                 res.render('register')
+        //     }
+        if(Email == ""|| password == "" || password.length <3 || usuario == "" || Fecha == "" || Documento == ""){
+            if (Email == ""){
+                let errors = {}
                 errors.message = "email no puede estar vacio"
                 res.locals.errors = errors
                 res.render('register')
 
-            }else if (password == "" || password.length <3){
+            }
+            if (password == "" || password.length <3){
                 let errors = {}
                 errors.mensajeContrasenia = "Contraseña invalida"
                 res.locals.errors = errors
                 res.render('register')
-            } else if (usuario == ""){
+            } 
+            if (usuario == ""){
                 let errors = {}
                     errors.mensaje = "Usuario no puede estar vacio"
                     res.locals.errors = errors
                     res.render('register')
     
-            } else if (Fecha == ""){
+            if (Fecha == ""){
                     let errors = {}
                         errors.mensajeFecha = "Fecha no puede estar vacio"
                         res.locals.errors = errors
-                        res.render('register')
-            } else if (Documento == ''){
+                        res.render('register')}
+            if (Documento == ''){
                 let errors = {}
                         errors.mensajeDocumento = "Documento no puede estar vacio"
                         res.locals.errors = errors
                         res.render('register')
-            }
+            }}}
             else{
                 let contra_encriptada = bcrypt.hashSync(password,12) 
                 db.Usuarios.create({
