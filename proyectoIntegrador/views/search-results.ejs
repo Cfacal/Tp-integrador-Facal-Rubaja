@@ -26,11 +26,7 @@
                         <article class="product-box_data">
                             <h2><%=resultados[i].nombre %></h2>
                                 <p><%=resultados[i].descripcion%></p>
-                                <% if (resultados[i].comentario_producto.length ===0){%>
-                                    <p>No hay comentarios</p>
-                                    <%}else{%>
-                                <p>Comentarios: <%=resultados[i].comentario_producto.length %></p>
-                                <%}%>
+                                <p>Creado por: <a href="/usuarios/perfil/<%=resultados[i].usuario_producto.id%>"><%=resultados[i].usuario_producto.nombre%></a></p>
                         </article>
                     </a>
                 </section>

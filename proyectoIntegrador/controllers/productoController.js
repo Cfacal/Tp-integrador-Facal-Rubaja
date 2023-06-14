@@ -34,7 +34,7 @@ const controlador = {
             } else {
                 esProductoDelLogueado = false
             }
-            //res.send(product)
+            // res.send(product)
 
             res.render('product', {productos: product, esProductoDelLogueado})
         }).catch(function(error){
@@ -90,6 +90,7 @@ const controlador = {
     busqueda: function(req,res){
         let busquedaUsuario = req.query.busquedaProductos
         db.Productos.findAll({
+            include: [{association:'usuario_producto'}],
             where: {
                 [op.or]: [
                     {nombre : { [op.like]: `%${busquedaUsuario}%`}},
@@ -97,11 +98,11 @@ const controlador = {
                 ], 
 
         },
-            include:[{association : 'comentario_producto'}],
             order: [
                 ['created_at', 'DESC']
             ],
-            raw: true
+            raw: true, 
+            nest: true
         }).then(function(data){
             console.log(data)
             let resultadosEncontrados
@@ -111,6 +112,7 @@ const controlador = {
             } else{
                 resultadosEncontrados = false
             }
+        
             res.render(
                 'search-results', {busqueda: busquedaUsuario, resultados: data, resultadosEncontrados: resultadosEncontrados }
                 
