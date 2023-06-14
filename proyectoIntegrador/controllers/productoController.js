@@ -52,6 +52,7 @@ const controlador = {
     },
     editar_producto: function(req,res){
         let id = req.params.id
+        
         db.Productos.findByPk(id)
         .then(function(producto){
             let Logueado 

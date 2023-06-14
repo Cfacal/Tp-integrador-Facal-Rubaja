@@ -1,6 +1,7 @@
 // const usuarios = require('../data/data')
 const bcrypt = require('bcryptjs');
 const db = require('../database/models/index')
+let op = db.Sequelize.Op
 
 const controlador = {
     ingresar: function(req, res){
@@ -122,66 +123,70 @@ const controlador = {
                 emial : Email
             }
         })
-        // if(Email == ""){
-        //     let errors = {}
-        //         errors.message = "email no puede estar vacio"
-        //         res.locals.errors = errors
-        //         res.render('register')
-
-        //     }else if (password == "" || password.length <3){
-        //         let errors = {}
-        //         errors.mensajeContrasenia = "Contraseña invalida"
-        //         res.locals.errors = errors
-        //         res.render('register')
-        //     } else if (usuario == ""){
-        //         let errors = {}
-        //             errors.mensaje = "Usuario no puede estar vacio"
-        //             res.locals.errors = errors
-        //             res.render('register')
-    
-        //     } else if (Fecha == ""){
-        //             let errors = {}
-        //                 errors.mensajeFecha = "Fecha no puede estar vacio"
-        //                 res.locals.errors = errors
-        //                 res.render('register')
-        //     } else if (Documento == ''){
-        //         let errors = {}
-        //                 errors.mensajeDocumento = "Documento no puede estar vacio"
-        //                 res.locals.errors = errors
-        //                 res.render('register')
-        //     }
-        if(Email == ""|| password == "" || password.length <3 || usuario == "" || Fecha == "" || Documento == ""){
-            if (Email == ""){
-                let errors = {}
+        if(Email == ""){
+            let errors = {}
                 errors.message = "email no puede estar vacio"
                 res.locals.errors = errors
                 res.render('register')
 
-            }
-            if (password == "" || password.length <3){
+            }else if (password == "" || password.length <3){
                 let errors = {}
                 errors.mensajeContrasenia = "Contraseña invalida"
                 res.locals.errors = errors
                 res.render('register')
-            } 
-            if (usuario == ""){
+            } else if (usuario == ""){
                 let errors = {}
                     errors.mensaje = "Usuario no puede estar vacio"
                     res.locals.errors = errors
                     res.render('register')
     
-            if (Fecha == ""){
+            } else if (Fecha == ""){
                     let errors = {}
                         errors.mensajeFecha = "Fecha no puede estar vacio"
                         res.locals.errors = errors
-                        res.render('register')}
-            if (Documento == ''){
+                        res.render('register')
+            } else if (Documento == ''){
                 let errors = {}
                         errors.mensajeDocumento = "Documento no puede estar vacio"
                         res.locals.errors = errors
                         res.render('register')
-            }}}
-            else{
+            }
+        // if(Email == ""|| password == "" || password.length <3 || usuario == "" || Fecha == "" || Documento == ""){
+        //     if (Email == ""){
+        //         let errors = {}
+        //         errors.message = "email no puede estar vacio"
+        //         res.locals.errors = errors
+        //         res.render('register')
+
+        //     }
+        //     if (password == "" || password.length <3){
+        //         let errorscontra = {}
+        //         errorscontra.mensajeContrasenia = "Contraseña invalida"
+        //         res.locals.errors = errorscontra
+        //         res.render('register')
+        //     } 
+        //     if (usuario == ""){
+        //         let errorsuser = {}
+        //             errorsuser.mensaje = "Usuario no puede estar vacio"
+        //             res.locals.errors = errorsuser
+        //             res.render('register')
+        //     }
+        //     if (Fecha == ""){
+        //             let errorsfecha = {}
+        //                 errorsfecha.mensajeFecha = "Fecha no puede estar vacio"
+        //                 res.locals.errors = errorsfecha
+        //                 res.render('register')
+        //     }
+
+        //     if (Documento == ''){
+        //         let errorsdni = {}
+        //                 errorsdni.mensajeDocumento = "Documento no puede estar vacio"
+        //                 res.locals.errors = errorsdni
+        //                 res.render('register')
+        //     }
+        // console.log(errors)}
+        // let errors = {}
+        else{
                 let contra_encriptada = bcrypt.hashSync(password,12) 
                 db.Usuarios.create({
                     emial: Email,
@@ -208,6 +213,40 @@ const controlador = {
         
 
     }
+}, 
+buscar: function(req, res){
+    let busqueda = req.query.busquedaUsuarios
+
+    db.Usuarios.findAll({
+        where: {
+            [op.or]: [
+                {nombre : { [op.like]: `%${busqueda}%`}},
+                {emial: {[op.like]: `%${busqueda}%`}}
+            ], 
+
+    },
+        order: [
+            ['created_at', 'DESC']
+        ],
+    }).then(function(data){
+        console.log(data)
+        let resultadosEncontrados
+
+        if(data.length > 0){
+            resultadosEncontrados = true
+        } else{
+            resultadosEncontrados = false
+        }
+    
+        res.render(
+            'user-search', {busqueda: busqueda, resultados: data, resultadosEncontrados: resultadosEncontrados }
+            
+        )
+        
+       
+    }).catch(function(error){
+        console.log(error)
+    })
 }
 }
 

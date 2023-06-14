@@ -12,4 +12,5 @@ router.get('/perfil/:id', usuariosControllers.ingresar_perfil);
 router.post('/registrarse',usuariosControllers.crear);
 router.get('/registrarse', usuariosControllers.registrarse);
 
+router.get('/busqueda', usuariosControllers.buscar)
 module.exports = router;
