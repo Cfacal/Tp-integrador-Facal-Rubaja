@@ -13,40 +13,19 @@
         <!-- <h2 class="col-12"> Registrate</h2> -->
         <form method="POST" action="/usuarios/registrarse" class="forms">
             <label>Email</label>
-            <%if(locals.errors){%>
-            <input type="email" name="Email" placeholder="<%=errors.message%>">
-            <%} else {%>
             <input type="email" name="Email">
-            <%} %>
             <br>
             <label>Usuario</label>
-            <%if(locals.errors){%>
-            <input type="text" name="usuario" placeholder = "<%=errors.mensaje%>">
-            <%} else {%>
             <input type="text" name="usuario">
-            <%} %>
             <br>
             <label>Contraseña</label>
-            <%if(locals.errors){%>
-            <input type="password" name="password" placeholder="<%=errors.mensajeContrasenia%>">
-            <%} else {%>
             <input type="password" name="password">
-            <%} %>
             <br>
             <label>Fecha de Nacimiento</label>
-            <%if(locals.errors){%>
-            <p><%=errors.mensajeFecha%></p>
             <input type="date" name="Fecha">
-            <%} else {%>
-            <input type="date" name="Fecha">
-            <%} %>
             <br>
             <label>Numero de Documento</label>
-            <%if(locals.errors){%>
-            <input type="number" name="Documento" placeholder="<%=errors.mensajeDocumento%>">
-            <%} else {%>
             <input type="number" name="Documento">
-            <%} %>
             <br>
             <label>Foto de Perfil</label>
             <input type="text" name="Foto">
@@ -57,7 +36,12 @@
 
     </div>
 
+    <%if(locals.errors){%>
+        <h2><%=errors.message%></h2>
+        <%} %>
+
 </div>
+
 
 <%- include("./partials/footer") %>
 

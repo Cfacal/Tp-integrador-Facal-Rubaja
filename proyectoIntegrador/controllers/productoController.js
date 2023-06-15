@@ -128,20 +128,48 @@ const controlador = {
         let usuarioId = req.session.usuario.id
         let productoId = req.params.id
         let {comentario} = req.body 
-        db.Comentarios.create({
-            usuario_id: usuarioId, 
-            producto_id: productoId,
-            comentario: comentario
-        }).then(function(data){
-            res.redirect('/productos/detalle/'+ productoId)
-        }).catch(function(err){
-            console.log(err)
-        })
+
+    if(comentario == ""){
+            let errors = {}
+                errors.message = "Comentario no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+     } else{
+            db.Comentarios.create({
+                usuario_id: usuarioId, 
+                producto_id: productoId,
+                comentario: comentario
+            }).then(function(data){
+                res.redirect('/productos/detalle/'+ productoId)
+            }).catch(function(err){
+                console.log(err)
+            })
+        }
+
+    
     },
     add:function(req,res){
         if(req.session.usuario != undefined){
         let usuarioId = req.session.usuario.id
         let {producto,nombre_prod,Descripcion,Fecha} = req.body
+        
+        if(nombre_prod == ""){
+            let errors = {}
+                errors.message = "Producto no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else if (Descripcion == ""){
+            let errors = {}
+                errors.message = "Descripción no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else if (Fecha == ""){
+            let errors = {}
+                errors.message = "Fecha no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else {
+
         db.Productos.create({
             usuario_id : usuarioId,
             nombre: nombre_prod,
@@ -157,7 +185,7 @@ const controlador = {
         .catch(function(err){
             console.log(err)
 
-        })
+        })}
 
         }else{
             res.redirect('/usuarios/ingresar')
@@ -166,6 +194,23 @@ const controlador = {
     editar: function(req,res){
         let id = req.params.id
         let {producto, nombre_prod, Descripcion, Fecha} = req.body
+
+        if(nombre_prod == ""){
+            let errors = {}
+                errors.message = "Producto no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else if (Descripcion == ""){
+            let errors = {}
+                errors.message = "Descripción no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else if (Fecha == ""){
+            let errors = {}
+                errors.message = "Fecha no puede estar vacio"
+                res.locals.errors = errors
+                res.render('register')
+        } else {
 
         db.Productos.update({
             nombre: nombre_prod,
@@ -182,7 +227,7 @@ const controlador = {
         })
         .catch(function(error){
             console.log(error)
-        })
+        })}
 
     },
     update: function(req,res){

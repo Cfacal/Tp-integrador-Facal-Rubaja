@@ -28,6 +28,9 @@
         </h2>
         
     </div>
+    <%if(locals.errors){%>
+        <h2><%=errors.message%></h2>
+        <%} %>
 </div>
 
 <%- include("./partials/footer") %>

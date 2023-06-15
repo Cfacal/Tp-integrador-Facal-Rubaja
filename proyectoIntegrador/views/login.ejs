@@ -31,9 +31,14 @@
             <br>
             <button type="submit">Ingresar</button>
         </form>
+
+
         
     </div>
     
+<%if(locals.errors){%>
+    <h2><%=errors.message%></h2>
+    <%} %>
 
 </div>
 

@@ -14,59 +14,63 @@ const controlador = {
     chequearUsuario: function(req,res){
         let {usuario, password, recordarme} = req.body 
         
-        if(usuario == "" && password == ""){
-                let errors = {}
-                errors.message = "Campo no puede estar vacio"
-                errors.mensaje = "Campo no puede estar vacio"
+        if(usuario == ""){
+            let errors = {}
+                errors.message = "Usuario no puede estar vacio"
                 res.locals.errors = errors
-                res.render('login')
-            
-        }
-        db.Usuarios.findOne({
-            where: {
-                emial: usuario
-            }, 
-            raw: true
-        })
-        .then(function(usuario){
-            if(usuario ==undefined){
+                res.render('register')
+
+            }else if (password == ""){
                 let errors = {}
-                    errors.message = "Usuario no encontrado"
-                    res.locals.errors = errors
-                    res.render('login')
-            }
-            let verificacionContra = bcrypt.compareSync(password, usuario.password)
-            if (verificacionContra){
-                req.session.usuario = {
-                    id: usuario.id,
-                    usuario: usuario.nombre,
-                    email: usuario.emial
-                }
-                if (recordarme === 'on'){
-                    res.cookie('recordarUsuario', {
-                        id: usuario.id, 
-                        usuario: usuario.nombre,
-                        email: usuario.emial
+                    errors.message = "Contraseña no puede estar vacio"
+                    res.locals.errors = errora
+                    res.render('register')
+            }else {
+                db.Usuarios.findOne({
+                    where: {
+                        emial: usuario
                     }, 
-                    {
-                        maxAge: 1000*60*2
-                }
-                    
-                    )
-                }
-                res.redirect('/')
-                
-            }else{
-                let errors = {}
-                errors.mensaje = "Datos incorrectos"
-                errors.message = "Datos incorrectos"
-                res.locals.errors = errors
-                res.render('login')
+                    raw: true
+                })
+                .then(function(usuario){
+                    if(usuario ==undefined){
+                        let errors = {}
+                            errors.message = "Usuario no encontrado"
+                            res.locals.errors = errors
+                            res.render('login')
+                    }
+                    let verificacionContra = bcrypt.compareSync(password, usuario.password)
+                    if (verificacionContra){
+                        req.session.usuario = {
+                            id: usuario.id,
+                            usuario: usuario.nombre,
+                            email: usuario.emial
+                        }
+                        if (recordarme === 'on'){
+                            res.cookie('recordarUsuario', {
+                                id: usuario.id, 
+                                usuario: usuario.nombre,
+                                email: usuario.emial
+                            }, 
+                            {
+                                maxAge: 1000*60*2
+                        }
+                            
+                            )
+                        }
+                        res.redirect('/')
+                        
+                    }else{
+                        let errors = {}
+                        errors.message = "Datos incorrectos"
+                        res.locals.errors = errors
+                        res.render('login')
+                    }
+                }).catch(function(error){
+                    console.log(error)
+                })
             }
-        }).catch(function(error){
-            console.log(error)
-        }
-        )
+        
     },
     editar_perfil: function(req,res){
         if(req.session.usuario != undefined){
@@ -125,67 +129,33 @@ const controlador = {
         })
         if(Email == ""){
             let errors = {}
-                errors.message = "email no puede estar vacio"
+                errors.message = "Email no puede estar vacio"
                 res.locals.errors = errors
                 res.render('register')
 
-            }else if (password == "" || password.length <3){
+            }else if (usuario == ""){
                 let errors = {}
-                errors.mensajeContrasenia = "Contraseña invalida"
-                res.locals.errors = errors
-                res.render('register')
-            } else if (usuario == ""){
-                let errors = {}
-                    errors.mensaje = "Usuario no puede estar vacio"
+                    errors.message = "Usuario no puede estar vacio"
                     res.locals.errors = errors
                     res.render('register')
+            
+            } else if (password == "" || password.length <3){
+                let errors = {}
+                errors.message = "Contraseña invalida"
+                res.locals.errors = errors
+                res.render('register')
     
             } else if (Fecha == ""){
                     let errors = {}
-                        errors.mensajeFecha = "Fecha no puede estar vacio"
+                        errors.message = "Fecha no puede estar vacio"
                         res.locals.errors = errors
                         res.render('register')
             } else if (Documento == ''){
                 let errors = {}
-                        errors.mensajeDocumento = "Documento no puede estar vacio"
+                        errors.message = "Documento no puede estar vacio"
                         res.locals.errors = errors
                         res.render('register')
             }
-        // if(Email == ""|| password == "" || password.length <3 || usuario == "" || Fecha == "" || Documento == ""){
-        //     if (Email == ""){
-        //         let errors = {}
-        //         errors.message = "email no puede estar vacio"
-        //         res.locals.errors = errors
-        //         res.render('register')
-
-        //     }
-        //     if (password == "" || password.length <3){
-        //         let errorscontra = {}
-        //         errorscontra.mensajeContrasenia = "Contraseña invalida"
-        //         res.locals.errors = errorscontra
-        //         res.render('register')
-        //     } 
-        //     if (usuario == ""){
-        //         let errorsuser = {}
-        //             errorsuser.mensaje = "Usuario no puede estar vacio"
-        //             res.locals.errors = errorsuser
-        //             res.render('register')
-        //     }
-        //     if (Fecha == ""){
-        //             let errorsfecha = {}
-        //                 errorsfecha.mensajeFecha = "Fecha no puede estar vacio"
-        //                 res.locals.errors = errorsfecha
-        //                 res.render('register')
-        //     }
-
-        //     if (Documento == ''){
-        //         let errorsdni = {}
-        //                 errorsdni.mensajeDocumento = "Documento no puede estar vacio"
-        //                 res.locals.errors = errorsdni
-        //                 res.render('register')
-        //     }
-        // console.log(errors)}
-        // let errors = {}
         else{
                 let contra_encriptada = bcrypt.hashSync(password,12) 
                 db.Usuarios.create({
