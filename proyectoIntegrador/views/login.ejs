@@ -12,19 +12,11 @@
         </div>
         <form method="post" action="/usuarios/ingresar" class="forms">
             <label>Email</label>
-            <%if(locals.errors){%>
-            <input type="text" name="usuario" placeholder = "<%=errors.message%>" >
-            <%} else {%>
                 <input type="text" name="usuario">
-            <%} %>
 
             <br>
             <label>Contraseña</label>
-            <%if(locals.errors){%>
-            <input type="password" name="password" placeholder = "<%=errors.mensaje%>" >
-            <%} else {%>
                 <input type="password" name="password">
-             <%} %>
             <br>
             <label>Recordarme</label>
             <input type="checkbox" name="recordarme">

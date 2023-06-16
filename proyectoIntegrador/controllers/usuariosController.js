@@ -18,13 +18,13 @@ const controlador = {
             let errors = {}
                 errors.message = "Usuario no puede estar vacio"
                 res.locals.errors = errors
-                res.render('register')
+                res.render('login')
 
             }else if (password == ""){
                 let errors = {}
                     errors.message = "Contraseña no puede estar vacio"
-                    res.locals.errors = errora
-                    res.render('register')
+                    res.locals.errors = errors
+                    res.render('login')
             }else {
                 db.Usuarios.findOne({
                     where: {
@@ -108,9 +108,6 @@ const controlador = {
             .catch(function(err){
                 console.log(err)
             })
-        //}else{
-            //res.redirect('/usuarios/ingresar')
-        //}
     
     },
     registrarse: function(req,res){

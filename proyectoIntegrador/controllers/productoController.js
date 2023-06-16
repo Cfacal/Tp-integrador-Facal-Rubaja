@@ -50,29 +50,6 @@ const controlador = {
             res.redirect('/')
         }
     },
-    editar_producto: function(req,res){
-        let id = req.params.id
-        
-        db.Productos.findByPk(id)
-        .then(function(producto){
-            let Logueado 
-            if(req.session.usuario !== undefined ){
-                if(req.session.usuario.id !== producto.usuario_id){
-                    Logueado = false
-                } else {
-                    Logueado = true
-                }
-            } else {
-                Logueado = false
-            }
-            res.render('product-edit',{
-                producto: producto,Logueado
-            })
-        })
-        .catch(function(error){
-            console.log(error)
-        })
-    },
     eliminar_producto: function(req,res){
         let id = req.params.id
 
@@ -129,12 +106,41 @@ const controlador = {
         let productoId = req.params.id
         let {comentario} = req.body 
 
+
     if(comentario == ""){
+
+        db.Productos.findByPk(productoId, {
+    
+            include:[
+                {
+                    association: 'comentario_producto',
+                    include:
+                    {
+                        association: 'usuario_comentario'
+                    },
+                },
+                {
+                    association: 'usuario_producto'
+                }
+            ]
+        }).then(function(data){
+            if(req.session.usuario !== undefined ){
+                if(req.session.usuario.id !== productoId.usuario_id){
+                    esProductoDelLogueado = false
+                } else {
+                    esProductoDelLogueado = true
+                }
+            } else {
+                esProductoDelLogueado = false
+            } 
+
             let errors = {}
                 errors.message = "Comentario no puede estar vacio"
                 res.locals.errors = errors
-                res.render('register')
-     } else{
+                res.render('product', {productos: data, esProductoDelLogueado});
+         }).catch(function(error){
+            console.log(error)
+        })} else{
             db.Comentarios.create({
                 usuario_id: usuarioId, 
                 producto_id: productoId,
@@ -157,17 +163,17 @@ const controlador = {
             let errors = {}
                 errors.message = "Producto no puede estar vacio"
                 res.locals.errors = errors
-                res.render('register')
+                res.render('product-add')
         } else if (Descripcion == ""){
             let errors = {}
                 errors.message = "Descripción no puede estar vacio"
                 res.locals.errors = errors
-                res.render('register')
+                res.render('product-add')
         } else if (Fecha == ""){
             let errors = {}
                 errors.message = "Fecha no puede estar vacio"
                 res.locals.errors = errors
-                res.render('register')
+                res.render('product-add')
         } else {
 
         db.Productos.create({
@@ -195,54 +201,60 @@ const controlador = {
         let id = req.params.id
         let {producto, nombre_prod, Descripcion, Fecha} = req.body
 
-        if(nombre_prod == ""){
-            let errors = {}
-                errors.message = "Producto no puede estar vacio"
-                res.locals.errors = errors
-                res.render('register')
-        } else if (Descripcion == ""){
-            let errors = {}
-                errors.message = "Descripción no puede estar vacio"
-                res.locals.errors = errors
-                res.render('register')
-        } else if (Fecha == ""){
-            let errors = {}
-                errors.message = "Fecha no puede estar vacio"
-                res.locals.errors = errors
-                res.render('register')
-        } else {
+        let productoEditado = {
+            usuarioId: req.session.usuario.id
+        }
 
-        db.Productos.update({
-            nombre: nombre_prod,
-            descripcion: Descripcion,
-            foto_del_producto: producto,
-            fecha_de_carga: Fecha
-        },{
-            where:{
-                id:id
+        db.Productos.findByPk(id)
+        .then((function(datos){
+            if(nombre_prod == ""){
+                productoEditado.nombre = datos.nombre      
+            }else{
+                productoEditado.nombre = nombre_prod
             }
-        })
-        .then(function(data){
-            res.redirect('/productos/detalle/'+ id)
-        })
-        .catch(function(error){
-            console.log(error)
-        })}
+            if(Descripcion == ""){
+                productoEditado.descripcion = datos.descripcion
+            }else{
+                productoEditado.descripcion = Descripcion
+            }
+            if(Fecha == ""){
+                productoEditado.fecha_de_carga = datos.fecha_de_carga
+            }else{
+                productoEditado.fecha_de_carga = Fecha
+            }
+            productoEditado.foto_del_producto = producto
+        
+        
 
+        db.Productos.update(productoEditado, {
+            where: {id:id}
+        }).then(function(data){
+            res.redirect('/productos/detalle/'+ id)
+        }).catch(function(error){
+            console.log(error)
+        })
+
+    })
+    ).catch(function(error){
+            console.log(error)
+    })
     },
     update: function(req,res){
-        let navegador 
-        if(req.session.usuario != undefined){
-            navegador = req.session.usuario.id
-        }else{
-            navegador = ""
-        }
         let id =req.params.id
         db.Productos.findByPk(id, 
             {include: [{association: 'usuario_producto'}]})
         .then(function(data){
+            if(req.session.usuario !== undefined ){
+                if(req.session.usuario.id !== data.usuario_id){
+                    Logueado = false
+                } else {
+                    Logueado = true
+                }
+            } else {
+                Logueado = false
+            }
         res.render('product-edit', {
-                data:data, navegador: navegador
+                data:data, Logueado
             })
         })
         .catch(function(error){
